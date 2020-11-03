@@ -1,0 +1,1371 @@
+@charset 'UTF-8';
+
+/**
+ * [replace with theme name] | Built with Slate
+ 
+@import '~normalize.css/normalize';
+
+// Settings
+@import './variables';
+
+// Tools
+@import './tools/mixins';
+@import './tools/functions';
+
+// Core
+@import './core/forms';
+@import './core/helpers';
+@import './core/layout';
+@import './core/media';
+@import './core/responsive-tables';
+@import './core/rte';
+@import './core/typography';
+
+// Components
+@import './components/buttons';
+@import './components/hero-banner';
+@import './components/icons';
+@import './components/placeholders';
+@import './components/responsive-images';
+@import './components/address-forms';
+
+// Sections
+@import './sections/blog-posts';
+@import './sections/collection-list';
+@import './sections/featured-collection';
+@import './sections/image-with-text';
+
+// Templates
+@import './templates/gift_card';
+@import './templates/product';
+*/
+
+@function rem($font-size) {
+  @return ($font-size / 16) + rem;
+}
+/*============================================================================
+  Flexbox prefix mixins from Bourbon
+    https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/css3/_flex-box.scss
+==============================================================================*/
+@mixin prefix($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      -webkit-#{$property}: $value;
+    } @else if $prefix == moz {
+      -moz-#{$property}: $value;
+    } @else if $prefix == ms {
+      -ms-#{$property}: $value;
+    } @else if $prefix == o {
+      -o-#{$property}: $value;
+    } @else if $prefix == spec {
+      #{$property}: $value;
+    } @else  {
+      @warn 'Unrecognized prefix: #{$prefix}';
+    }
+  }
+}
+
+
+@mixin display-flexbox() {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%; // necessary for ie10
+}
+
+@mixin flex-wrap($value: nowrap) {
+  @include prefix(flex-wrap, $value, webkit moz ms spec);
+}
+
+@mixin flex-flow($value) {
+  @include prefix(flex-flow, $value, webkit moz ms spec);
+}
+
+@mixin justify-content($justify: flex-start) {
+  @include prefix(justify-content, $justify, webkit ms spec);
+}
+
+@mixin align-items($value: stretch) {
+  $alt-value: $value;
+
+  @if $value == 'flex-start' {
+    $alt-value: start;
+  } @else if $value == 'flex-end' {
+    $alt-value: end;
+  }
+
+  -ms-flex-align: $alt-value; // sass-lint:disable-line no-misspelled-properties
+  @include prefix(align-items, $value, webkit moz ms o spec);
+}
+
+@mixin align-self($align: auto) {
+  // sass-lint:disable no-misspelled-properties
+  -ms-flex-item-align: $align;
+  @include prefix(align-self, $align, webkit spec);
+}
+
+@mixin flex-direction($value) {
+  @include prefix(flex-direction, $value, webkit moz ms spec);
+}
+
+@mixin flex-order($value) {
+  @include prefix(order, $value, webkit ms spec);
+}
+
+/*============================================================================*/
+
+@mixin placeholder($color, $opacity) {
+  &::-webkit-input-placeholder {
+    color: $color;
+    opacity: $opacity;
+  }
+
+  &::-moz-placeholder {
+    color: $color;
+    opacity: $opacity;
+  }
+
+  &:-ms-input-placeholder {
+    color: $color;
+    opacity: $opacity;
+  }
+
+  &::placeholder {
+    color: $color;
+    opacity: $opacity;
+  }
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("/fonts/OpenSans-Regular-webfont.woff2") format("woff2"),
+       url("/fonts/OpenSans-Regular-webfont.woff") format("woff");
+}
+/*============================================================================
+  Grid Breakpoints and Class Names
+    - Do not change the variable names
+==============================================================================*/
+$grid-medium: 1000px;
+$grid-large: 990px;
+$grid-widescreen: 1400px;
+$grid-gutter: 16px;
+$grid-margin: 48;
+
+$small: 'small';
+$medium: 'medium';
+$medium-down: 'medium-down';
+$medium-up: 'medium-up';
+$large: 'large';
+$large-down: 'large-down';
+$large-up: 'large-up';
+$widescreen: 'widescreen';
+
+// The `$grid-breakpoints` list is used to build our media queries.
+// You can use these in the media-query mixin.
+$grid-breakpoints: (
+  $small '(max-width: #{$grid-medium - 1})',
+  $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-large - 1})',
+  $medium-down '(max-width: #{$grid-large - 1})',
+  $medium-up '(min-width: #{$grid-medium})',
+  $large '(min-width: #{$grid-large}) and (max-width: #{$grid-widescreen - 1})',
+  $large-down '(max-width: #{$grid-widescreen - 1})',
+  $large-up '(min-width: #{$grid-large})',
+  $widescreen '(min-width: #{$grid-widescreen})'
+  );
+  
+  $breakpoint-has-widths: ($small, $medium-up);
+  $breakpoint-has-push: ($medium-up);
+
+/* General
+$color-primary-background: $settings-color-primary-background;
+$color-primary-text: $settings-color-primary-text;
+$color-accent1: $settings-color-accent1;
+$color-accent2: $settings-color-accent2;*/
+
+$link-hover-opacity: 0.8;
+
+/*================ GLOBAL ================*/
+/*============================================================================
+  #Normalize
+  Based on normalize.css v3.0.2 | MIT License | git.io/normalize
+==============================================================================*/
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+body,
+input,
+textarea,
+button,
+select {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  background-color: transparent;
+}
+
+em {
+  font-style: italic;
+}
+
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+img {
+  max-width: 100%;
+  border: 0;
+}
+
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+button,
+html input {
+  &[disabled] {
+    cursor: default;
+  }
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+input {
+  &[type="search"],
+  &[type="number"],
+  &[type="email"],
+  &[type="password"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+textarea {
+  overflow: auto;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.image-border-radius{
+  border-radius: 10px;
+}
+
+/*============================================================================
+  Fast Tap
+  enables no-delay taps (FastClick-esque) on supporting browsers
+==============================================================================*/
+a,
+button,
+[role="button"],
+input,
+label,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+html{
+  width: 100%;
+  font-size: 100%;
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-font-feature-settings: "lnum"; 
+  -moz-font-feature-settings: "lnum"; 
+  font-feature-settings: "lnum"; 
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+}
+
+body,
+input,
+textarea,
+button,
+select {
+  font-family: Raleway regular, 'Helvetica';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+/*================ Headings ================*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #121212;
+  margin: 0 0 $grid-gutter;
+  padding: 0;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: inherit;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: inherit;
+  text-transform: inherit;
+  font-family: "adobe-caslon-pro", 'Serif';
+  font-weight: 400;
+  margin:0;
+  padding: 0;
+}
+
+h5,
+h6 {
+  font-family: "Raleway", 'Helvetica';
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+form {
+  margin: 0;
+}
+
+// Force option color (affects IE only)
+option {
+  color: #121212;
+  background-color: #fafafa;
+}
+
+$color-blankstate: rgba(#121212, 0.35);
+$color-blankstate-background: #E5E5E5;
+
+
+.placeholder-svg {
+  display: block;
+  fill: $color-blankstate;
+  background-color: $color-blankstate-background;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.placeholder-noblocks {
+  padding: 40px;
+  text-align: center;
+}
+
+// Mimic a background image by wrapping the placeholder svg with this class
+.placeholder-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  .icon {
+    border: 0;
+  }
+}
+
+.page-width {
+  max-width: 1176px;
+  padding: 0 24px;
+  margin: 0 auto;
+}
+
+button,
+input[type="submit"],
+label[for] {
+  cursor: pointer;
+}
+
+/*================ Prepare Transition ================*/
+.is-transitioning {
+  // sass-lint:disable-block no-important
+  display: block !important;
+  visibility: visible !important;
+}
+
+/*=============== Image Transitions ===================*/
+.blur-up {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  transition: filter 400ms, -webkit-filter 400ms;
+}
+
+.blur-up.lazyloaded {
+  -webkit-filter: blur(0);
+  filter: blur(0);
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 250ms ease-out;
+
+  &.lazyloaded {
+    opacity: 1;
+  }
+}
+
+/*=============== Theme Genral Settings ===================*/
+$tmp-accent-color : #FDD04B;
+
+h1{
+  font-size: 3rem;
+  line-height: rem(56);
+}
+
+h2{
+  font-size: 2rem;
+  line-height: 3rem;
+}
+
+h3{
+  font-size: 1.75rem;
+  line-height: rem(40);
+}
+
+h4{
+  font-size: 1.5rem;
+  line-height: rem(32);
+}
+
+.small-header{
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+h5{
+  //font-family: ;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+p,
+li {
+  line-height: 1.5rem;
+  color: --color-primary;
+  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin:0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+a {
+  color: #121212;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+.small-head{
+  font-size: rem(18);
+  line-height: rem(24);
+}
+
+.medium-header{
+  font-size: rem(20);
+  line-height: rem(30);
+}
+
+button{
+  font-family: "Raleway";
+  font-weight: 600;
+  background-color: $tmp-accent-color;
+  border-radius: 20px;
+  border: none;
+}
+
+.icon-drop-shadow{
+  filter: drop-shadow( 0px 4px 6px #505050);
+}
+
+.link-hover-opacity-text:hover{
+  opacity: ($link-hover-opacity - 0.2);
+}
+
+.padding-left-gutter{
+  padding-left: $grid-gutter;
+}
+
+.padding-left-d-gutter{
+  padding-left: ($grid-gutter * 2);
+}
+
+.lineheight-section-text{
+  line-height: 2rem;
+}
+
+/*================ Media Query Mixin ================*/
+@mixin media-query($media-query) {
+  $breakpoint-found: false;
+
+  @each $breakpoint in $grid-breakpoints {
+    $name: nth($breakpoint, 1);
+    $declaration: nth($breakpoint, 2);
+
+    @if $media-query == $name and $declaration {
+      $breakpoint-found: true;
+
+      @media only screen and #{$declaration} {
+        @content;
+      }
+    }
+  }
+
+  @if $breakpoint-found == false {
+    @warn 'Breakpoint "#{$media-query}" does not exist';
+  }
+}
+
+@mixin clearfix() {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  zoom: 1;
+}
+
+/*============================================================================
+  Grid Columns
+    - Create width classes, prepended by the breakpoint name.
+==============================================================================*/
+// sass-lint:disable brace-style empty-line-between-blocks
+@mixin grid-column-generator($breakpoint: '') {
+  /** Whole */
+  .#{$breakpoint}one-whole { width: 100%; }
+
+  /* Halves */
+  .#{$breakpoint}one-half { width: percentage(1 / 2); }
+
+  /* Thirds */
+  .#{$breakpoint}one-third { width: percentage(1 / 3); }
+  .#{$breakpoint}two-thirds { width: percentage(2 / 3); }
+
+  /* Quarters */
+  .#{$breakpoint}one-quarter { width: percentage(1 / 4); }
+  .#{$breakpoint}two-quarters { width: percentage(2 / 4); }
+  .#{$breakpoint}three-quarters { width: percentage(3 / 4); }
+
+  .#{$breakpoint}two-ninths { width: 22%; }
+  .#{$breakpoint}thirty-two { width: 32%; }
+
+  /* Fifths */
+  .#{$breakpoint}one-fifth { width: percentage(1 / 5); }
+  .#{$breakpoint}two-fifths { width: percentage(2 / 5); }
+  .#{$breakpoint}three-fifths { width: percentage(3 / 5); }
+  .#{$breakpoint}four-fifths { width: percentage(4 / 5); }
+
+  /* Sixths */
+  .#{$breakpoint}one-sixth { width: percentage(1 / 6); }
+  .#{$breakpoint}two-sixths { width: percentage(2 / 6); }
+  .#{$breakpoint}three-sixths { width: percentage(3 / 6); }
+  .#{$breakpoint}four-sixths { width: percentage(4 / 6); }
+  .#{$breakpoint}five-sixths { width: percentage(5 / 6); }
+
+  /* Eighths */
+  .#{$breakpoint}one-eighth { width: percentage(1 / 8); }
+  .#{$breakpoint}two-eighths { width: percentage(2 / 8); }
+  .#{$breakpoint}three-eighths { width: percentage(3 / 8); }
+  .#{$breakpoint}four-eighths { width: percentage(4 / 8); }
+  .#{$breakpoint}five-eighths { width: percentage(5 / 8); }
+  .#{$breakpoint}six-eighths { width: percentage(6 / 8); }
+  .#{$breakpoint}seven-eighths { width: percentage(7 / 8); }
+
+  /* Tenths */
+  .#{$breakpoint}one-tenth { width: percentage(1 / 10); }
+  .#{$breakpoint}two-tenths { width: percentage(2 / 10); }
+  .#{$breakpoint}three-tenths { width: percentage(3 / 10); }
+  .#{$breakpoint}four-tenths { width: percentage(4 / 10); }
+  .#{$breakpoint}five-tenths { width: percentage(5 / 10); }
+  .#{$breakpoint}six-tenths { width: percentage(6 / 10); }
+  .#{$breakpoint}seven-tenths { width: percentage(7 / 10); }
+  .#{$breakpoint}eight-tenths { width: percentage(8 / 10); }
+  .#{$breakpoint}nine-tenths { width: percentage(9 / 10); }
+
+  /* Twelfths */
+  .#{$breakpoint}one-twelfth { width: percentage(1 / 12); }
+  .#{$breakpoint}two-twelfths { width: percentage(2 / 12); }
+  .#{$breakpoint}three-twelfths { width: percentage(3 / 12); }
+  .#{$breakpoint}four-twelfths { width: percentage(4 / 12); }
+  .#{$breakpoint}five-twelfths { width: percentage(5 / 12); }
+  .#{$breakpoint}six-twelfths { width: percentage(6 / 12); }
+  .#{$breakpoint}seven-twelfths { width: percentage(7 / 12); }
+  .#{$breakpoint}eight-twelfths { width: percentage(8 / 12); }
+  .#{$breakpoint}nine-twelfths { width: percentage(9 / 12); }
+  .#{$breakpoint}ten-twelfths { width: percentage(10 / 12); }
+  .#{$breakpoint}eleven-twelfths { width: percentage(11 / 12); }
+
+}
+
+/*================ Grid push classes ================*/
+@mixin grid-push-generator($breakpoint: '') {
+  /* Halves */
+  .#{$breakpoint}push-one-half { left: percentage(1 / 2); }
+
+  /* Thirds */
+  .#{$breakpoint}push-one-third { left: percentage(1 / 3); }
+  .#{$breakpoint}push-two-thirds { left: percentage(2 / 3); }
+
+  /* Quarters */
+  .#{$breakpoint}push-one-quarter { left: percentage(1 / 4); }
+  .#{$breakpoint}push-two-quarters { left: percentage(2 / 4); }
+  .#{$breakpoint}push-three-quarters { left: percentage(3 / 4); }
+
+  /* Fifths */
+  .#{$breakpoint}push-one-fifth { left: percentage(1 / 5); }
+  .#{$breakpoint}push-two-fifths { left: percentage(2 / 5); }
+  .#{$breakpoint}push-three-fifths { left: percentage(3 / 5); }
+  .#{$breakpoint}push-four-fifths { left: percentage(4 / 5); }
+
+  /* Sixths */
+  .#{$breakpoint}push-one-sixth { left: percentage(1 / 6); }
+  .#{$breakpoint}push-two-sixths { left: percentage(2 / 6); }
+  .#{$breakpoint}push-three-sixths { left: percentage(3 / 6); }
+  .#{$breakpoint}push-four-sixths { left: percentage(4 / 6); }
+  .#{$breakpoint}push-five-sixths { left: percentage(5 / 6); }
+
+  /* Eighths */
+  .#{$breakpoint}push-one-eighth { left: percentage(1 / 8); }
+  .#{$breakpoint}push-two-eighths { left: percentage(2 / 8); }
+  .#{$breakpoint}push-three-eighths { left: percentage(3 / 8); }
+  .#{$breakpoint}push-four-eighths { left: percentage(4 / 8); }
+  .#{$breakpoint}push-five-eighths { left: percentage(5 / 8); }
+  .#{$breakpoint}push-six-eighths { left: percentage(6 / 8); }
+  .#{$breakpoint}push-seven-eighths { left: percentage(7 / 8); }
+
+  /* Tenths */
+  .#{$breakpoint}push-one-tenth { left: percentage(1 / 10); }
+  .#{$breakpoint}push-two-tenths { left: percentage(2 / 10); }
+  .#{$breakpoint}push-three-tenths { left: percentage(3 / 10); }
+  .#{$breakpoint}push-four-tenths { left: percentage(4 / 10); }
+  .#{$breakpoint}push-five-tenths { left: percentage(5 / 10); }
+  .#{$breakpoint}push-six-tenths { left: percentage(6 / 10); }
+  .#{$breakpoint}push-seven-tenths { left: percentage(7 / 10); }
+  .#{$breakpoint}push-eight-tenths { left: percentage(8 / 10); }
+  .#{$breakpoint}push-nine-tenths { left: percentage(9 / 10); }
+
+  /* Twelfths */
+  .#{$breakpoint}push-one-twelfth { left: percentage(1 / 12); }
+  .#{$breakpoint}push-two-twelfths { left: percentage(2 / 12); }
+  .#{$breakpoint}push-three-twelfths { left: percentage(3 / 12); }
+  .#{$breakpoint}push-four-twelfths { left: percentage(4 / 12); }
+  .#{$breakpoint}push-five-twelfths { left: percentage(5 / 12); }
+  .#{$breakpoint}push-six-twelfths { left: percentage(6 / 12); }
+  .#{$breakpoint}push-seven-twelfths { left: percentage(7 / 12); }
+  .#{$breakpoint}push-eight-twelfths { left: percentage(8 / 12); }
+  .#{$breakpoint}push-nine-twelfths { left: percentage(9 / 12); }
+  .#{$breakpoint}push-ten-twelfths { left: percentage(10 / 12); }
+  .#{$breakpoint}push-eleven-twelfths { left: percentage(11 / 12); }
+}
+
+/*================ Clearfix helper on uniform grids ================*/
+@mixin grid-uniform-clearfix($breakpoint: '') {
+  .grid--uniform {
+    .#{$breakpoint}one-half:nth-child(2n+1),
+    .#{$breakpoint}one-third:nth-child(3n+1),
+    .#{$breakpoint}one-quarter:nth-child(4n+1),
+    .#{$breakpoint}one-fifth:nth-child(5n+1),
+    .#{$breakpoint}one-sixth:nth-child(6n+1),
+    .#{$breakpoint}two-sixths:nth-child(3n+1),
+    .#{$breakpoint}three-sixths:nth-child(2n+1),
+    .#{$breakpoint}one-eighth:nth-child(8n+1),
+    .#{$breakpoint}two-eighths:nth-child(4n+1),
+    .#{$breakpoint}four-eighths:nth-child(2n+1),
+    .#{$breakpoint}five-tenths:nth-child(2n+1),
+    .#{$breakpoint}one-twelfth:nth-child(12n+1),
+    .#{$breakpoint}two-twelfths:nth-child(6n+1),
+    .#{$breakpoint}three-twelfths:nth-child(4n+1),
+    .#{$breakpoint}four-twelfths:nth-child(3n+1),
+    .#{$breakpoint}six-twelfths:nth-child(2n+1) { clear: both; }
+  }
+}
+// sass-lint:enable brace-style empty-line-between-blocks
+
+/*================ Build Base Grid Classes ================*/
+@include grid-column-generator();
+
+/*================ Build Responsive Grid Classes ================*/
+@each $breakpoint in $breakpoint-has-widths {
+  @include media-query($breakpoint) {
+    @include grid-column-generator('#{$breakpoint}--');
+    @include grid-uniform-clearfix('#{$breakpoint}--');
+  }
+}
+
+/*================ Build Grid Push Classes ================*/
+@each $breakpoint in $breakpoint-has-push {
+  @include media-query($breakpoint) {
+    @include grid-push-generator('#{$breakpoint}--');
+  }
+}
+
+/*================ Helper Classes ================*/
+.clearfix {
+  @include clearfix();
+}
+
+.visually-hidden {
+  position: absolute !important; // sass-lint:disable-line no-important
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  border: 0;
+}
+
+.js-focus-hidden:focus {
+  outline: none;
+}
+
+.label--hidden {
+  position: absolute;
+  height: 0;
+  width: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+
+  // No placeholders, so force show labels
+  .supports-no-placeholder & {
+    position: static;
+    height: auto;
+    width: auto;
+    margin-bottom: 2px;
+    overflow: visible;
+    clip: initial;
+  }
+}
+
+// Hide element if JS is supported
+.supports-js--hide:not(html) {
+  display: none;
+}
+
+// Only show when JS is not supported
+.supports-no-js:not(html) {
+  html.supports-no-js & {
+    display: initial;
+  }
+}
+
+// Only show when JS is supported
+.supports-js {
+  html.supports-no-js & {
+    display: none;
+  }
+}
+
+// Critical CSS Resets
+// -----------------------------------------------------------------------------
+//
+// These styles are used to override styles set by critical CSS in the
+// `critical-css.liquid` snippet.
+
+.critical-hide {
+  display: inherit;
+}
+
+.critical-clear {
+  opacity: 1;
+  visibility: visible;
+}
+
+.main-content .shopify-section {
+  display: inherit;
+}
+
+body:not(.template-index) .main-content {
+  opacity: 1;
+}
+
+/*================ Buttons ================*/
+.prod-collection-button {
+  width: 100%;
+  height: 2rem;
+
+  &:hover {
+    opacity: $link-hover-opacity;
+  }
+  &:hover::after,
+  &::after {
+    outline: 0 !important; // sass-lint:disable-line no-important
+  }
+}
+
+.btn-hover-opacity{
+  &:hover {
+    opacity: $link-hover-opacity;
+  }
+  &:hover::after,
+  &::after {
+    outline: 0 !important; // sass-lint:disable-line no-important
+  }
+}
+
+.image-button {
+  height: rem(40);
+  background-color: #11ffee00;
+  border: 1px solid #fafafa;
+  color: #fafafa;
+
+  &:hover {
+    border: none;
+    background-color: $tmp-accent-color;
+    color: #121212;
+    transition: all 0.3s ease 0s;
+  }
+}
+
+/*================ Header ================*/
+
+.header-ham{
+  display: none;
+  @include media-query($small) {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    @include flex-direction(row);
+    @include align-self(center);
+    min-width: 24px;
+  }
+}
+
+.small-hide{
+  display: inherit;
+  @include media-query($small) {
+    display: none !important;
+  }
+}
+
+.header-logo-container{
+  @include display-flexbox();
+  @include justify-content(center);
+}
+
+.cart-icon-container{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  @include flex-direction(row);
+  @include justify-content(flex-end);
+  @include align-items(flex-end);
+  @include align-self(baseline);
+  min-width: 312px;
+  @include media-query($small) {
+    min-width: 24px;
+  }
+}
+
+.site-header{
+  width:100%;
+  background-color: #F5EEE0;
+  //min-height: 64px;
+}
+
+.header-container{
+  @include display-flexbox();
+  @include justify-content(space-around);
+  @include flex-direction(row);
+  @include align-items(baseline);
+}
+
+.flex-align-base{
+  @include align-self(baseline);
+}
+
+.logo-header{
+  font-family: "Raleway";
+  font-weight: 600;
+  font-size: 32px;
+  letter-spacing: -1.6px;
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  @include flex-direction(row);
+  @include align-self(center);
+  padding: 0 ;
+  min-width: 360px;
+  margin-top: 4px;
+  margin-left: -48px;
+}
+
+.header-ul{
+  @include display-flexbox();
+  height: 100%;
+  margin: 0;
+}
+
+.menu-link{
+  display: inline;
+  margin-left: 48px;
+
+  &:hover .cursor-default{
+    opacity: ($link-hover-opacity - 0.3);
+  }
+}
+
+.header-ul a{
+  &:hover {
+    opacity: ($link-hover-opacity - 0.3);
+  }
+}
+
+.cart-bag-icon{
+  &:hover {
+    opacity: ($link-hover-opacity - 0.3);
+  }
+  margin-bottom: -2px;
+}
+
+.cursor-default{
+  cursor: default;
+}
+
+.dropdown-container{
+  position: relative; 
+  margin-left: -24px;
+}
+
+.dropdown-on-hover:hover .dropdown-categories{
+  @include display-flexbox();
+  @include flex-direction(column);
+  width: 152px;
+  background-color: #FCF5E7;
+  box-shadow: 1px 1px 8px 0px #bfbfbf;
+}
+
+.dropdown-categories{
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: #FCF5E7;
+  border-radius: 10px;
+  width: 152px;
+  z-index: 1;
+}
+
+.child-link-wrapper{
+  margin: 24px 32px 8px 32px;
+
+  & li{
+    margin-bottom: 16px;
+  }
+}
+
+/*================ Hero ================*/
+
+.hero{
+  width: 100%; 
+  height: 704px; 
+  transform: none;
+  background-color: #bfbfbf;
+  padding-top: 192px;
+  background: {
+    size: cover;
+    repeat: no-repeat;
+    position: 50% 50%;
+  }
+  &.lazyloaded {
+    background-color: transparent;
+  }
+}
+
+.hero-text-content{
+  
+  width: 528px;
+
+  & button{
+    width: 168px;
+    margin-top: $grid-gutter;
+  }
+}
+
+.img-text-color{
+  color: #fafafa;
+}
+
+/*================ Intro Section ================*/
+
+.flex-center{
+  @include display-flexbox();
+  @include justify-content(center);
+}
+
+.intro-wrapper{
+  padding: 144px 0;
+}
+
+.introduction-container{
+  @include flex-direction(column);
+  width: 760px;
+  text-align: center;
+}
+
+.intro-face-icon-wrapper{
+  @include align-self(center);
+  margin-bottom: 24px;
+}
+
+/*================ Three Steps Section ================*/
+
+.three-steps-wrapper{
+  width: 100%;
+  padding: 64px 48px 120px 48px;
+  background-color: #F9F6F2;
+}
+
+.three-steps-page-width{
+  max-width: 1000px;
+  padding: 0 24px;
+  margin: 0 auto;
+}
+
+.steps-container{
+  margin-top: 64px;
+  @include display-flexbox();
+  @include flex-direction(row);
+  width: 100%;
+  @include justify-content(space-between);
+
+  & button{
+    width : 136px;
+  }
+  /*
+  @include media-query($small) {
+    @include flex-direction(column);
+    height: 100%;
+  }*/
+}
+
+.three-steps-icon{
+  position: relative;
+  top: -32px;
+  z-index: 3;
+}
+
+.three-step-card{
+  width: 31%;
+  height: 480px;
+  border-radius: 10px;
+  background: {
+    size: cover;
+    repeat: no-repeat;
+    position: 50% 50%;
+  }
+  padding: 0 32px;
+/*
+  @include media-query($small) {
+    height: 272px;
+    width: 100%;
+
+  }*/
+
+}
+
+.three-steps-content-container{
+  @include display-flexbox();
+  @include flex-direction(column);
+  @include justify-content(space-between);
+  height: 75%;
+}
+
+/*================ Image and Text ================*/
+
+.section-wrapper{
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+.gray-background{
+  background-color: #EEF5F6;
+}
+
+.image-and-text-container{
+  @include display-flexbox();
+  @include flex-direction(row);
+}
+
+.image-and-text{
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: 50% 50%;
+  width: 45%;
+  height: 600px;
+}
+
+.image-and-text-content{
+  @include display-flexbox();
+  @include flex-direction(column);
+  @include justify-content(flex-end);
+  padding-left: 62px;
+  padding-right: 32px;
+  & button{
+    margin-top: 16px;
+    height: 40px;
+    width: 168px;
+  }
+  & h1{
+    margin-bottom: 24px;
+  }
+}
+
+.image-and-text-list-container{
+  margin-top: 32px;
+
+  & h4{
+    margin-bottom: 24px;
+  }
+  & li{
+    margin-bottom: 16px;
+  }
+}
+
+/*================ Product Slider ================*/
+
+.product-slider-wrapper{
+  width: 100%;
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.product-slider-container{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  @include flex-direction(row);
+  @include justify-content(space-around);
+  margin-left:-32px;
+}
+
+.product-card-text-container{
+  margin: 8px 0 0 8px;
+}
+
+/*================ Article Slider ================*/
+
+.article-slider-wrapper{
+  width: 100%;
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.slider-container{
+  @include display-flexbox();
+  @include flex-direction(row);
+  @include justify-content(space-around);
+}
+
+.article-slider-container{
+  @include display-flexbox();
+  @include flex-direction(row);
+  @include justify-content(space-around);
+  margin-left: $grid-gutter;
+  width:100%;
+}
+
+.article-slider-text{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  @include flex-direction(column);
+  @include justify-content(center);
+}
+
+.article-slider-card{
+  width:100%;
+  background-color: #F5EEE0;
+  border-radius: 10px;
+  padding: 24px 24px 48px 24px;
+  text-align: center;
+
+  & h4{
+    margin-top: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 92px;
+  }
+}
+
+/*================ Footer ================*/
+
+.footer-wrapper{
+  background-color: #FDD04B;
+  width: 100%;
+  padding: 120px 0;
+}
+
+.footer-container{
+  @include display-flexbox();
+  @include flex-direction(row);
+}
+
+.footer-column{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  @include flex-direction(column);
+  text-align: center;
+}
+
+.footer-ig-icon{
+  @include align-self(center);
+}
+
+
+
+
+
+.re{
+  background-color: red;
+}
+
+.bl{
+  background-color: blue;
+}
+
+.grid__item {
+  float: left;
+  padding-left: $grid-gutter;
+  width: 100%;
+
+  &[class*='--push'] {
+    position: relative;
+  }
+
+  .grid--gutter-large & {
+    padding-left: (3 * $grid-gutter);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.content-margin {
+  display: flex;
+  flex-wrap: wrap;
+  width: 250px;
+  margin: 36px;
+}
+.prod-card{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.card-img-container{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.product-card-image {
+  border-radius: 10px;
+  &:hover {
+    opacity: $link-hover-opacity;
+  }
+}
+
+.prod-card-text {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 24px;
+}
+
+.prod-card-text p, h2, ul {
+  padding-top: 0;
+  margin:0;
+  margin-bottom: 8px;
+}
+
+

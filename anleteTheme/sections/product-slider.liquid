@@ -1,0 +1,30 @@
+<section>
+{%- assign featuredCollection = collections[section.settings.collection] -%}
+
+<div class="product-slider-wrapper">
+  <div class="page-width ">
+    <div class="product-slider-container">
+    {% for product in featuredCollection.products limit: 4 %}
+    
+      <div class="medium-up--one-quarter padding-left-d-gutter">
+        {% include 'product-card', product: product %}
+      </div>
+      
+    {%endfor%}
+    </div>
+    {{ product.metafields.Special.Properties }}
+  </div>
+</div>
+</section>
+{% schema %}
+  {
+    "name": "Product Slider",
+    "settings": [
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Select a collection"
+      }
+    ]
+  }
+{% endschema %}

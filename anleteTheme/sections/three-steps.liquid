@@ -1,0 +1,99 @@
+<section>
+
+<div class="three-steps-wrapper">
+  <div class="flex-center">
+    <h1>{{ section.settings.header-text | escape }}</h1>
+  </div>
+  <div class="three-steps-page-width steps-container">
+      <div class="three-step-card lazyload" style="background-image: url('{{ section.settings.image-1.src | img_url: '2048x'  }}');">
+        <div class="three-steps-icon">
+          {%include 'icon-wash-face'%}
+        </div>
+        <div class="three-steps-content-container">
+          <h2 class="img-text-color">{{section.settings.text-1}}</h2>
+          <a href="/collections">
+            <button class="image-button">
+              Läs mer
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="three-step-card lazyload" style="background-image: url('{{ section.settings.image-2.src | img_url: '2048x'  }}');">
+        <div class="three-steps-icon">
+          {%include 'icon-star-face'%}
+        </div>
+        <div class="three-steps-content-container">
+          <h2 class="img-text-color">{{section.settings.text-2}}</h2>
+          <a href="/collections">
+            <button class="image-button">
+              Läs mer
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="three-step-card lazyload" style="background-image: url('{{ section.settings.image-3.src | img_url: '2048x'  }}');">
+        <div class="three-steps-icon">
+          {%include 'icon-mask-face'%}
+        </div>
+        <div class="three-steps-content-container">
+          <h2 class="img-text-color">{{section.settings.text-2}}</h2>
+          <a href="/collections">
+            <button class="image-button">
+              Läs mer
+            </button>
+          </a>
+        </div>
+      </div>
+  </div>
+</div>
+
+</section>
+
+{% schema %}
+  {
+    "name": "Three Steps",
+    "settings": [
+      {
+        "id": "image-1",
+        "type": "image_picker",
+        "label": "Image 1"
+      },
+      {
+        "id": "image-2",
+        "type": "image_picker",
+        "label": "Image 2"
+      },
+      {
+        "id": "image-3",
+        "type": "image_picker",
+        "label": "Image 3"
+      },
+      {
+        "id": "text-1",
+        "type": "textarea",
+        "default": "Something",
+        "label": "Text for image 1"
+      },
+      {
+        "id": "text-2",
+        "type": "textarea",
+        "default": "Something",
+        "label": "Text for image 2"
+      },
+      {
+        "id": "text-3",
+        "type": "textarea",
+        "default": "Something",
+        "label": "Text for image 3"
+      },
+      {
+        "id": "header-text",
+        "type": "text",
+        "label": "Header text",
+        "default": "Skapa din egna 3 stegs rutin",
+        "info": "Title for three steps guide",
+        "placeholder": "Skapa din egna 3 stegs rutin"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,85 @@
+<section>
+<div class="section-wrapper gray-background">
+  <div class="image-and-text-container page-width">
+    <img class="image-and-text" src="{{ section.settings.image.src | img_url: '2048x'  }}">
+    <div class="image-and-text-content">
+      <h1>{{ section.settings.label | escape }}</h1>
+      <p>{{section.settings.text}}</p>
+      <div class="image-and-text-list-container">
+        <h4>{{ section.settings.label-2 | escape }}</h4>
+        <ul>
+          <li>{{ section.settings.list-text-1 | escape }}</li>
+          <li>{{ section.settings.list-text-2 | escape }}</li>
+          <li>{{ section.settings.list-text-3 | escape }}</li>
+          <li>{{ section.settings.list-text-4 | escape }}</li>
+        </ul>
+        <a href="/collections">
+          <button class="btn-hover-opacity"> Gör testet </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+{% schema %}
+  {
+    "name": "Image and text",
+    "settings": [
+      {
+        "id": "image",
+        "type": "image_picker",
+        "label": "Image in section"
+      },
+      {
+        "id": "label",
+        "type": "text",
+        "label": "Label",
+        "default": "Hudtyp spelar roll",
+        "info": "Header next to image",
+        "placeholder": "Hudtyp spelar roll"
+      },
+      {
+        "id": "text",
+        "type": "textarea",
+        "default": "Alla har olika hudtyper",
+        "label": "Text below label"
+      },
+      {
+        "id": "label-2",
+        "type": "text",
+        "label": "Label-2",
+        "default": "Vad har du för hudtyp?",
+        "placeholder": "Vad har du för hudtyp?"
+      },
+      {
+        "id": "list-text-1",
+        "type": "text",
+        "label": "list-text-1",
+        "default": "Torr - huden känns ofta stram",
+        "placeholder": "Torr - huden känns ofta stram"
+      },
+      {
+        "id": "list-text-2",
+        "type": "text",
+        "label": "list-text-2",
+        "default": "Torr - huden känns ofta stram",
+        "placeholder": "Torr - huden känns ofta stram"
+      },
+      {
+        "id": "list-text-3",
+        "type": "text",
+        "label": "list-text-3",
+        "default": "Torr - huden känns ofta stram",
+        "placeholder": "Torr - huden känns ofta stram"
+      },
+      {
+        "id": "list-text-4",
+        "type": "text",
+        "label": "list-text-4",
+        "default": "Torr - huden känns ofta stram",
+        "placeholder": "Torr - huden känns ofta stram"
+      }
+    ]
+  }
+{% endschema %}

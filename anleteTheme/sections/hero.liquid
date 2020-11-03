@@ -1,0 +1,71 @@
+<section>
+{%comment%}
+<p>{{section.settings.hero-image.src}}</p>
+For Getting the image from AWS S3
+<img src="https://anlete.s3.eu-north-1.amazonaws.com/bilder/tstNew.jpg">
+
+<div style="background-image: url('https://anlete.s3.eu-north-1.amazonaws.com/bilder/tstNew.jpg');" class="tmp-div"> 
+
+ </div>
+{%endcomment%}
+  <div class="hero lazyload" style="background-image: url('{{ section.settings.hero-image.src | img_url: '2048x'  }}');"
+  data-bgset="{% include 'bgset', image: section.settings.hero-image %}" data-section-type="hero" alt="skincare-for-men"> 
+    <div class="page-width">
+      <div class="hero-text-content">
+        {% if section.settings.hero-label != blank %}
+          <h1 class="img-text-color hero-text-width" >
+            {{ section.settings.hero-label | escape }}
+          </h1>
+        {% endif %}
+        {% if section.settings.hero-text != blank %}
+          <p class="img-text-color hero-text-width">
+            {{ section.settings.hero-text}}
+          </p>
+        {% endif %}
+        {% if section.settings.hero-button-text != blank %}
+          <a href="/collections">
+            <button class="image-button">
+              {{section.settings.hero-button-text}}
+            </button>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "id": "hero-image",
+        "type": "image_picker",
+        "label": "Tmp image"
+      },
+      {
+        "id": "hero-label",
+        "type": "text",
+        "label": "Hero Label",
+        "default": "Hudvård för män först!",
+        "info": "Title for first hero",
+        "placeholder": "Hudvård för Män!"
+      },
+      {
+        "type": "textarea",
+        "id": "hero-text",
+        "default": "Tvätt är den viktigaste delen av rutinen. Under dagen sätter sig all sort smuts från föroreningar i luften till den naturliga.",
+        "label": "Hero text"
+      },
+      {
+        "id": "hero-button-text",
+        "type": "text",
+        "label": "Hero button text",
+        "default":   "Läs mer",
+        "info":      "Text inside button",
+        "placeholder": "Läs mer"
+      }
+    ]
+  }
+{% endschema %}

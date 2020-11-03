@@ -1,0 +1,51 @@
+<section>
+{%- assign featuredBlogs = blogs[section.settings.blo-slider] -%}
+
+  <div class="article-slider-wrapper">
+    <div class="page-width slider-container">
+      <div class="medium-up--four-twelfths article-slider-text">
+        <h1>{{section.settings.label}}</h1>
+        <p> {{section.settings.text}}</p>
+      </div>
+      <div class="article-slider-container">
+        {% for article in featuredBlogs.articles %} 
+        <div class="medium-up--one-third padding-left-gutter"> 
+          <div class="article-slider-card">
+            <a  href="{{ article.url }}" >
+              <img class="image-border-radius" src="{{ article.image.src | img_url: '2048x'  }}">
+              <h4 class="medium-header">{{article.title}}</h4>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Blog Slider",
+    "settings": [
+      {
+        "id": "blo-slider",
+        "type": "blog",
+        "label": "Select a blog collection"
+      },
+      {
+        "id": "label",
+        "type": "text",
+        "label": "Label",
+        "default": "Artiklar och Recensioner",
+        "info": "Label for section",
+        "placeholder": "Artiklar och Recensioner"
+      },
+      {
+        "id": "text",
+        "type": "textarea",
+        "default": "Här finns recensioner på alla våra produkter samt artiklar om hur du tar hand om din hud.",
+        "label": "Text below label"
+      }
+    ]
+  }
+{% endschema %}
