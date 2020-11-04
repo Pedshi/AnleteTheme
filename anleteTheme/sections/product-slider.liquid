@@ -1,12 +1,17 @@
 <section>
 {%- assign featuredCollection = collections[section.settings.collection] -%}
 
+
 <div class="product-slider-wrapper">
   <div class="page-width ">
+    <div class="product-slider-header">
+      <h1 class="mobile-h1">Utvalda Produkter</h1>
+    </div>
     <div class="product-slider-container">
     {% for product in featuredCollection.products limit: 4 %}
     
-      <div class="medium-up--one-quarter padding-left-d-gutter">
+      <div class="medium-up--one-quarter xsmall-small--one-half xsmall--one-whole
+        padding-left-d-gutter product-slider-card-wrapper">
         {% include 'product-card', product: product %}
       </div>
       
@@ -15,6 +20,7 @@
     {{ product.metafields.Special.Properties }}
   </div>
 </div>
+
 </section>
 {% schema %}
   {

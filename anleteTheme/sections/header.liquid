@@ -25,11 +25,23 @@
     </div>
   {%- endif -%}
 
+  
+
   <header class="site-header" role="banner">
+  <div>
     <div class="page-width header-container">
       <div class="header-ham">
-        {% include 'icon-burger' %}
+        <a href="javascript:void(0);" class="icon" onclick="toggleFunction()">
+          <div id="ham-icon">
+            {% include 'icon-burger' %}
+          </div>
+          <div id="close-icon" class="hide-small-nav">
+            {% include 'icon-close' %}
+          </div>
+        </a>
       </div>
+
+
       <nav class="header-nav small-hide" role="navigation">
         <ul class="header-ul">
           {% for link in linklists[section.settings.menu].links %}
@@ -99,7 +111,81 @@
         </ul>
       {% endif %}
     </div>
+
+  
+
+  </div>
+
+
+  <div id="toggle-header" class="header-ham-navigation small-up-hide" style="display:none;">
+      <div class="header-ham-container">
+        <nav role="navigation">
+          <ul class="nav-main-links">
+            {% for link in linklists[section.settings.menu].links %}
+              {% if link.links != blank %}
+                <li class="ham-main-links">
+                  <a href="javascript:void(0);" onclick="toggleChildLinks()">
+                    <h3>
+                      {{ link.title }}
+                      {% include 'icon-arrow-down' %}
+                    </h3>
+                  </a>
+                  <div id="toggle-child-link" style="display:none;">
+                    <ul class="nav-child-links">
+                        {% for childlink in link.links %}
+                          <li>
+                            <a href="{{ childlink.url }}">
+                              <h4 class="small-head">
+                                {{ childlink.title }}
+                              </h4>
+                            </a>
+                          </li>
+                        {% endfor %}
+                    </ul>
+                  </div>
+                </li>
+              {% else %}
+                <li class="ham-main-links">
+                  <a href="{{ link.url }}">
+                    <h3> 
+                      {{ link.title }} 
+                    </h3>
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </nav>        
+      <div>
+      </div>
+
+
   </header>
+<script>
+    function toggleFunction() {
+      var x = document.getElementById("toggle-header");
+      var ham = document.getElementById("ham-icon");
+      var close = document.getElementById("close-icon");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+        close.style.display = "none";
+        ham.style.display = "block";
+      } else {
+        x.style.display = "block";
+        close.style.display = "block";
+        ham.style.display = "none";
+      }
+    }
+
+    function toggleChildLinks(){
+      var childDiv = document.getElementById("toggle-child-link");
+      if (childDiv.style.display === "block") {
+        childDiv.style.display = "none";
+      } else {
+        childDiv.style.display = "block";
+      }
+    }
+  </script>
 </section>
 
 {% schema %}

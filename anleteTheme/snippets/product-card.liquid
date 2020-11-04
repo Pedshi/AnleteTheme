@@ -7,15 +7,17 @@
   <a href="{{ product.url | within: collection }}">
     <h4 class="link-hover-opacity-text">{{product.vendor}}</h4>
     <h4 class="small-header link-hover-opacity-text" style="white-space: 
-    nowrap;overflow: hidden;text-overflow: ellipsis;">
+      nowrap;overflow: hidden;text-overflow: ellipsis;">
     {{product.title}}
     </h4>
   </a>
   <h4 class="small-header">{{ product.price | money_without_trailing_zeros }}</h4>
-  <ul>
-    {%for property in product.metafields.Special%}
-      <li>- {{ property | last }}</li>
-    {%endfor%}
-  </ul>
+  <div class="">
+    <ul>
+      {%for property in product.metafields.Special%}
+        <li>- {{ property | last }}</li>
+      {%endfor%}
+    </ul>
+  </div>
 </div>
 <button class="prod-collection-button">Lägg till</button>

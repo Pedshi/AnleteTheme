@@ -2,15 +2,17 @@
 
 <div class="three-steps-wrapper">
   <div class="flex-center">
-    <h1>{{ section.settings.header-text | escape }}</h1>
+    <h1 class="mobile-h1 text-center">{{ section.settings.header-text | escape }}</h1>
   </div>
   <div class="three-steps-page-width steps-container">
+
+    <div class="three-step-card-container">
       <div class="three-step-card lazyload" style="background-image: url('{{ section.settings.image-1.src | img_url: '2048x'  }}');">
         <div class="three-steps-icon">
           {%include 'icon-wash-face'%}
         </div>
         <div class="three-steps-content-container">
-          <h2 class="img-text-color">{{section.settings.text-1}}</h2>
+          <h2 class="img-text-color mobile-h2">{{section.settings.text-1}}</h2>
           <a href="/collections">
             <button class="image-button">
               Läs mer
@@ -18,12 +20,15 @@
           </a>
         </div>
       </div>
+    </div>
+
+    <div class="three-step-card-container">
       <div class="three-step-card lazyload" style="background-image: url('{{ section.settings.image-2.src | img_url: '2048x'  }}');">
         <div class="three-steps-icon">
           {%include 'icon-star-face'%}
         </div>
         <div class="three-steps-content-container">
-          <h2 class="img-text-color">{{section.settings.text-2}}</h2>
+          <h2 class="img-text-color mobile-h2">{{section.settings.text-2}}</h2>
           <a href="/collections">
             <button class="image-button">
               Läs mer
@@ -31,12 +36,15 @@
           </a>
         </div>
       </div>
+    </div>
+    
+    <div class="three-step-card-container">
       <div class="three-step-card lazyload" style="background-image: url('{{ section.settings.image-3.src | img_url: '2048x'  }}');">
         <div class="three-steps-icon">
           {%include 'icon-mask-face'%}
         </div>
         <div class="three-steps-content-container">
-          <h2 class="img-text-color">{{section.settings.text-2}}</h2>
+          <h2 class="img-text-color mobile-h2">{{section.settings.text-3}}</h2>
           <a href="/collections">
             <button class="image-button">
               Läs mer
@@ -44,6 +52,8 @@
           </a>
         </div>
       </div>
+    </div>
+
   </div>
 </div>
 
