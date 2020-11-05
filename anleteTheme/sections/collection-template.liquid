@@ -1,33 +1,60 @@
 {%- assign limit = section.settings.products | times: section.settings.rows -%}
 {%- assign totalProducts = collection.products.size -%}
 
-<div class="collection-template" data-section-id="{{ section.id }}" data-section-type="collection-template">
+<div data-section-id="{{ section.id }}" data-section-type="collection-template">
   {% paginate collection.products by limit %}
 
-  {% if section.settings.collection_hero_image and collection.image %}
-    <div class="section-header-image-wrapper">
-      <div class="section-header-image{% if section.settings.collection_hero_image_parallax %} section-header-image--parallax{% endif %} lazyload" data-bgset="{% include 'bgset', image: collection.image %}"></div>
 
-      <noscript>
-        <div class="section-header-image" style="background-image: {{ collection.image | img_url: 'master' }}"></div>
-      </noscript>
+  {% if section.settings.collection_hero_image and collection.image %}
+    <div class="collection-header-section">
+      <div class="collection-header-container">
+        <div class="collection-header-text">
+          <h4>{{ collection.title }}</h4>
+          <p>{{ collection.description }}</p>
+        </div>
+        <div class="medium-up--one-third small--one-half collection-header-image">
+          {%if collection.metafields.IconType.icon == "wash" %}
+            <div class="collection-header-icon xsmall-up-show">
+              {%include 'icon-wash-face', size: '64px'%}
+            </div>
+            <div class="collection-header-icon-small xsmall-down-show">
+              {%include 'icon-wash-face', size: '40px'%}
+            </div>
+
+          {%elsif collection.metafields.IconType.icon == "mask" %}
+            <div class="collection-header-icon xsmall-up-show">
+              {%include 'icon-mask-face', size: '64px'%}
+            </div>
+            <div class="collection-header-icon-small xsmall-down-show">
+              {%include 'icon-mask-face', size: '40px'%}
+            </div>
+
+          {%elsif collection.metafields.IconType.icon == "star" %}
+            <div class="collection-header-icon xsmall-up-show">
+              {%include 'icon-star-face', size: '64px'%}
+            </div>
+            <div class="collection-header-icon-small xsmall-down-show">
+              {%include 'icon-star-face', size: '40px'%}
+            </div>
+          {%endif%}
+          <img class="image-border-radius" src="{{ collection.image | img_url: '2048x' }}">
+        </div>
+      </div>
     </div>
   {% endif %}
+
+
 
   <div class="page-width">
 
     
-
+    {%comment%}
     <div class="grid text-center">
       <div class="grid__item medium-up--ten-twelfths medium-up--push-one-twelfth">
         <header class="section-header">
-          <h1 class="section-header__title h2">{{ collection.title }}</h1>
-          {% if collection.description != blank %}
-            <div class="section-header__description rte">
-              {{ collection.description }}
-            </div>
-          {% endif %}
-
+          
+          
+        
           {%- if section.settings.product_tags_enable or section.settings.product_sorting_enable -%}
             <div class="collection-dropdowns">
               {%- if section.settings.product_tags_enable -%}
@@ -46,7 +73,7 @@
                   </select>
                 </div>
               {%- endif -%}
-
+            
               {%- if section.settings.product_sorting_enable -%}
                 <div class="collection-sort">
                   {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
@@ -61,18 +88,24 @@
               {%- endif -%}
             </div>
           {%- endif -%}
+          
         </header>
       </div>
     </div>
+    {%endcomment%}
+    <div class="collection-product-wrapper">
+      <div class="collection-product-container">
+        {% for product in collection.products %}
+            <div class="medium-up--one-quarter xsmall-small--one-half xsmall--one-whole
+              padding-left-d-gutter collection-product-card-wrapper">
+              {% include 'product-card', product: product %}
+            </div>
+        {% endfor %}
+      </div>
+    </div>
 
-    {%- assign desktopColumns = section.settings.products -%}
-    {%- assign mobileColumns = '1' -%}
-
-    {%- capture gridClasses -%}
-      {% if desktopColumns == '3' and totalProducts > 2 %}medium-up--one-third {% else %}medium-up--one-half {% endif %}
-      {% if mobileColumns == '2' %}small--one-half {% endif %}
-    {%- endcapture -%}
-
+    
+{%comment%}
     <div class="card-list grid" data-desktop-columns="{{ desktopColumns }}" data-mobile-columns="{{ mobileColumns }}" data-grid-style="{{ section.settings.grid_style }}">
       <div class="card-list__column{% if totalProducts == 1 %} card-list__column--center{% endif %} grid grid__item {{ gridClasses }}">
         {% for product in collection.products %}
@@ -80,7 +113,10 @@
         {% endfor %}
       </div>
     </div>
+{%endcomment%}
 
+
+    {%comment%}
     {% if collection.products.size == 0 %}
       <p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
     {% endif %}
@@ -90,6 +126,8 @@
         {% include 'pagination' %}
       </div>
     {% endif %}
+    {%endcomment%}
+
   </div>
 
   {% endpaginate %}
