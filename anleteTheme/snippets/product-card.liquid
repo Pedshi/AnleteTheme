@@ -5,13 +5,13 @@
 </a>
 <div class="product-card-text-container">
   <a href="{{ product.url | within: collection }}">
-    <h4 class="link-hover-opacity-text">{{product.vendor}}</h4>
-    <h4 class="small-header link-hover-opacity-text" style="white-space: 
+    <h4 class="link-hover-opacity-text product-vendor-text">{{product.vendor}}</h4>
+    <h4 class="product-card-info-text link-hover-opacity-text" style="white-space: 
       nowrap;overflow: hidden;text-overflow: ellipsis;">
     {{product.title}}
     </h4>
   </a>
-  <h4 class="small-header">{{ product.price | money_without_trailing_zeros }}</h4>
+  <h4 class="product-card-info-text">{{ product.price | money_without_trailing_zeros }}</h4>
   <div class="">
     <ul>
       {%for property in product.metafields.Special%}
