@@ -2481,6 +2481,7 @@ var data = {
 
 var selectors$8 = {
   ajaxCart: '.cart-drawer',
+  headCartNbr: '[data-bag-cart-nbr]',
   itemList: '[data-cart-item-list]',
   item: '[data-cart-item]',
   itemId: '[data-cart-item-id]',
@@ -2509,6 +2510,8 @@ var selectors$8 = {
   cartNoteInput: '[data-cart-note]',
   cartMessage: '[data-cart-message]',
   cartSubtotal: '[data-cart-subtotal]',
+  cartInputPlusBtn: '[data-cart-item-input-plus-btn]',
+  cartInputMinusBtn: '[data-cart-item-input-minus-btn]',
   cartSubmit: '[data-cart-submit]'
 };
 
@@ -2555,6 +2558,9 @@ var ajaxCart = {
       selectors$8.itemInputQuantity,
       this._onItemQuantityEmptyBlur.bind(this)
     );
+    
+    this.on('click', selectors$8.cartInputPlusBtn, this._onQuantityPlusButtonClicked.bind(this));
+    this.on('click', selectors$8.cartInputMinusBtn, this._onQuantityMinusButtonClicked.bind(this));
     this.on('focus', selectors$8.itemInputQuantity, this._highlightText);
     this.on('click', selectors$8.itemDelete, this._onItemDelete.bind(this));
     this.on('change', selectors$8.cartNoteInput, this._onNoteChange.bind(this));
@@ -2615,6 +2621,9 @@ var ajaxCart = {
 
     $(selectors$8.itemList, $container).prepend(this._createItemList(state));
 
+    var cartNbr = document.getElementById('header-bag-cart-nbr');
+    cartNbr.textContent = state.item_count;
+
     $(selectors$8.cartNoteInput, $container).val(state.note);
 
     $(selectors$8.cartDiscountContainer, $container).toggleClass(
@@ -2660,16 +2669,9 @@ var ajaxCart = {
         $(selectors$8.itemImage, $item)
           .attr(
             'src',
-            item.image ? images.getSizedImageUrl(item.image, 'medium') : ''
+            item.image ? images.getSizedImageUrl(item.image, '648x') : ''
           )
           .toggleClass('hide', typeof item.image !== 'string');
-
-        $(selectors$8.itemBackgroundImage, $item).css(
-          'background-image',
-          item.image
-            ? 'url(' + images.getSizedImageUrl(item.image, 'medium') + ')'
-            : 'none'
-        );
 
         $(selectors$8.itemTitle, $item).text(item.product_title);
 
@@ -2678,6 +2680,16 @@ var ajaxCart = {
         $(selectors$8.itemPriceContainer, $item).html(itemPrice);
 
         $(selectors$8.itemLinePriceContainer, $item).html(itemLinePrice);
+
+        $(selectors$8.cartInputPlusBtn, $item).attr(
+          'id',
+          item.key
+        );
+        
+        $(selectors$8.cartInputMinusBtn, $item).attr(
+          'id',
+          item.key
+        );
 
         $(selectors$8.itemLabelQuantity, $item).attr(
           'for',
@@ -2847,6 +2859,30 @@ var ajaxCart = {
 
     this.trigger('cart_storage_state_change', [state]);
     this.update(cart.getLocalState());
+  },
+
+  _onQuantityPlusButtonClicked: function(evt){
+    var elemId = evt.target.id;
+    var input = document.getElementById('quantity_' + elemId);
+    var quantity = input.value
+    if (quantity === '') return;
+    quantity = parseInt(quantity);
+    quantity = quantity + 1;
+    this.trigger('cart_item_quantity_change', [elemId, quantity]);
+
+    cart.changeItem(elemId, quantity).catch(this._onError.bind(this));
+  },
+
+  _onQuantityMinusButtonClicked: function(evt){
+    var elemId = evt.target.id;
+    var input = document.getElementById('quantity_' + elemId);
+    var quantity = input.value
+    if (quantity === '') return;
+    quantity = parseInt(quantity);
+    quantity = quantity - 1;
+    this.trigger('cart_item_quantity_change', [elemId, quantity]);
+
+    cart.changeItem(elemId, quantity).catch(this._onError.bind(this));
   },
 
   _onItemQuantityChange: function(evt) {

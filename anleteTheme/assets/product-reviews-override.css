@@ -1,0 +1,182 @@
+.spr-container{
+  padding: 120px 0;
+  border-color: none;
+  border: none;
+}
+
+.spr-summary-actions-newreview{
+  background-color: #FDD04B;
+  border-radius: 20px;
+  font-family: "Raleway", Helvetica, sans-serif;
+  font-weight: 600;
+  border: none;
+  height: 2rem;
+  text-align: center;
+  padding: 4px;
+  width: 168px;
+}
+
+.spr-summary-actions-newreview:hover{
+  opacity: 0.8;
+}
+
+.spr-form-contact, .spr-form-review{
+  width: 50%;
+}
+
+input, textarea {
+  border-radius: 20px;
+  border: 1px solid #121212;
+}
+
+.spr-form-review-title{
+  width: 50%;
+}
+
+.spr-form-input, .spr-form-label{
+  padding-left:8px;
+}
+
+.spr-form-contact-name{
+  width: 50%;
+}
+
+.spr-button-primary{
+  background-color: #FDD04B;
+  border-radius: 20px;
+  font-family: "Raleway", Helvetica, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #121212;
+  padding: 0;
+  width: 128px;
+  border: none;
+  height: 2rem;
+  text-align: center;
+}
+
+.spr-starrating,
+.spr-starratings{
+  color: #FDD04B;
+}
+
+.spr-review-header-byline{
+  font-family: "adobe-caslon-pro", 'Serif';
+  color: #121212;
+  font-style: unset;
+  font-size: 14px;
+}
+
+.spr-review-header{
+  width: 25%;
+}
+
+.spr-review-content{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.spr-review-footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width:25%;
+}
+
+.spr-review-reportreview{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.spr-review{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 999px){
+  .spr-header{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .spr-header h2{
+    display: flex;
+  }
+
+  .spr-summary-starrating{
+    width:100%;
+  }
+
+  .spr-summary-caption{
+    width:50%;
+  }
+
+  .spr-summary-actions{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .spr-review{
+    flex-direction: column;
+  }
+
+  .spr-review-header{
+    width: 100%;
+  }
+
+  .spr-review-reportreview{
+    text-align: left;
+    width: 100%;
+  }
+}
+
+
+@media only screen and (max-width: 999px) and (min-width: 400px){
+  .spr-summary-actions{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .spr-summary{
+    display: flex;
+    flex-direction: row;
+    text-align: unset !important;
+  }
+}
+
+
+
+@media only screen and (max-width: 399px){
+  .spr-summary-actions{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .spr-summary{
+    display: flex;
+    flex-direction: column;
+    text-align: unset !important;
+  }
+}
+
+.spr-form-message-error{
+  color: #fafafa;
+  border-radius: 10px;
+}
+
+.spr-icon-star,
+.spr-icon-star-empty{
+  color: #FDD04B;
+  opacity:1 !important;
+}

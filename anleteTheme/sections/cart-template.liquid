@@ -61,7 +61,7 @@ data-section-id="{{ section.id }}" data-section-type="cart-template" data-cart-t
                 {% assign itemImage = false %}
               {% endif %}
               <a class="" href="{{ item.url | within: collections.all }}"  data-cart-item-href>
-                <img class="image-border-radius table-cart-image lazyload" src="{{ item | img_url: '1048x' }}" alt="{{ item.title | escape }}" data-cart-item-image>
+                <img class="image-border-radius table-cart-image lazyload" src="{{ item | img_url: '648x' }}" alt="{{ item.title | escape }}" data-cart-item-image>
               </a>
             </td>
 
@@ -149,22 +149,22 @@ data-section-id="{{ section.id }}" data-section-type="cart-template" data-cart-t
 
             <td class="cart-item-quantity">
               <div class="product-quantity-input xs-quanitty-input-wrapper">
-                <button  type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus-icon xs-quantity-minus"></button>
+                <button data-cart-item-input-minus-btn id="{{ item.key }}" type="button" class="minus-icon xs-quantity-minus"></button>
                 <input class="quantity" id="quantity_{{ item.key }}"
                  value="{{ item.quantity }}" type="number" pattern="\d*" 
                  min="1" name="updates[{{ item.key }}]" required data-cart-item-input-quantity>
-                <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus-icon xs-quantity-plus"></button>
+                <button data-cart-item-input-plus-btn id="{{ item.key }}" type="button" class="plus-icon xs-quantity-plus"></button>
               </div>
             </td>
 
             <td class="cart-item-tot-price">
               <div class="cart-item-tot-rem" data-cart-item-line-price-container>
                 <span class=" ">{{ item.original_line_price | money }}</span>
-                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" 
+              </div>
+              <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" 
                     class="cart-item-remove" data-cart-item-delete>
                     {{ 'cart.general.remove' | t }}
-                </a>
-              </div>
+              </a>
             </td>
           </tr>
         {% endfor %}
