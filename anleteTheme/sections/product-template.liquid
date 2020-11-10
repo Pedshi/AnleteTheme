@@ -31,19 +31,30 @@
       <h3 class="xsmall-h3 product-vendor-text">{{product.vendor}}</h3>
       <h4 class="mobile-h4 ">{{product.title}}</h4>
       <h4 class="mobile-h4 medium-header">{{product.price | money_without_trailing_zeros }}</h4>
-      <div class="detail-add-to-cart">
-        <div class="product-quantity-input">
-          <label class="visually-hidden " for="Quantity-{{ section.id }}">
-            {{ 'products.product.quantity' | t }}</label>
-          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus-icon"></button>
-          <input class="quantity" type="number" id="Quantity-{{ section.id }}" 
-            name="quantity" value="1" min="1" pattern="[0-9]*">
-          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus-icon"></button>
-        </div>
-
-        <button class="btn-hover-opacity detail-add-button">Lägg Till</button>
-      </div>
       
+      {% form 'product', product %}
+        <div class="detail-add-to-cart">
+          <input type="hidden" name="return_to" value="back" />
+          <div class="product-quantity-input">
+            <label class="visually-hidden " for="Quantity-{{ section.id }}">
+              {{ 'products.product.quantity' | t }}</label>
+            <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus-icon"></button>
+            <input class="quantity" type="number" id="Quantity-{{ section.id }}" 
+              name="quantity" value="1" min="1" pattern="[0-9]*">
+            <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus-icon"></button>
+          </div>
+          <select name="id" class="product-form__master-select supports-no-js" data-master-select>
+          {% for variant in product.variants %}
+            <option {% if variant == product.selected_or_first_available_variant %} 
+            selected="selected" {% endif %} data-sku="{{ variant.sku }}" 
+            value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}
+            </option>
+          {%endfor%}
+          </select>
+          <button type="submit" name="add" data-cart-submit class="btn-hover-opacity detail-add-button">Lägg Till</button>
+        </div>
+      {% endform %}
+
       <div class="detail-text-slider">
         <span class="small-slider-text detail-slider h5" onclick="currentDetailDesc(0)">Detaljer</span>
         {%for property in product.metafields.DescSlides limit: 4 %}
@@ -69,7 +80,6 @@
   </div>
   
 <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
-
   
   <script>
     var slideIndex = 1;

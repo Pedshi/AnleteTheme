@@ -82,8 +82,9 @@
       </div>
 
       <div class="cart-icon-container">
-        <a href="/cart" class=>
+        <a href="/cart" class="header-cart-wrapper">
           {% include 'icon-bag-cart' %}
+          <p class="header-cart-items">{{cart.item_count}}</p>
         </a>
       </div>
       {% if shop.customer_accounts_enabled %}

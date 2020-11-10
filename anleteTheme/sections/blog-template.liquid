@@ -1,7 +1,23 @@
 {%- assign limit = section.settings.articles | times: section.settings.rows -%}
 
 <div class="blog-template" data-section-id="{{ section.id }}" data-section-type="blog-template">
+    <header class="blog-header text-center">
+      <h1>{{ page_title }}</h1>
+    </header>
+    <div class="blog-card-wrapper">
+      {% for article in blog.articles %}
+        <div class="medium-up--one-third xsmall-small--one-half xsmall--one-whole blog-card"> 
+          <div class="article-slider-card">
+            <a  href="{{ article.url }}" >
+              <img class="image-border-radius" src="{{ article.image.src | img_url: '748x'  }}">
+              <h4 class="medium-header">{{article.title}}</h4>
+            </a>
+          </div>
+        </div>
+      {%endfor%}
+    </div>
 
+    {%comment%}
     <div class="page-width">
       <header class="section-header section-header--small text-center">
         <h1 class="section-header__title h2">{{ page_title }}</h1>
@@ -31,7 +47,7 @@
 
       
     </div>
-
+    {%endcomment%}
   
 </div>
 

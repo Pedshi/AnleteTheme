@@ -5,8 +5,10 @@
 </a>
 <div class="product-card-text-container">
   <a href="{{ product.url | within: collection }}">
-    <h4 class="link-hover-opacity-text product-vendor-text">{{product.vendor}}</h4>
-    <h4 class="product-card-info-text link-hover-opacity-text" style="white-space: 
+    <div style="width:100%">
+      <h4 class="link-hover-underline product-vendor-text" style="display:inline-block;">{{product.vendor}}</h4>
+    </div>
+    <h4 class="product-card-info-text link-hover-underline" style="white-space: 
       nowrap;overflow: hidden;text-overflow: ellipsis;">
     {{product.title}}
     </h4>
@@ -20,4 +22,8 @@
     </ul>
   </div>
 </div>
-<button class="prod-collection-button">Lägg till</button>
+{% form 'product', product %}
+  <input type="hidden" name="return_to" value="back" />
+  <button class="prod-collection-button">Lägg till</button>
+  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+{%endform%}

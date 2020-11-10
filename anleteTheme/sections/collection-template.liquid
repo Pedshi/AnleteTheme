@@ -6,38 +6,40 @@
 
 
   {% if section.settings.collection_hero_image and collection.image %}
-    <div class="collection-header-section">
-      <div class="collection-header-container">
-        <div class="collection-header-text">
-          <h4>{{ collection.title }}</h4>
-          <p>{{ collection.description }}</p>
-        </div>
-        <div class="medium-up--one-third small--one-half collection-header-image">
-          {%if collection.metafields.IconType.icon == "wash" %}
-            <div class="collection-header-icon xsmall-up-show">
-              {%include 'icon-wash-face', size: '64px'%}
-            </div>
-            <div class="collection-header-icon-small xsmall-down-show">
-              {%include 'icon-wash-face', size: '40px'%}
-            </div>
+    <div class="collection-header-wrapper">
+      <div class="collection-header-section">
+        <div class="collection-header-container">
+          <div class="collection-header-text">
+            <h4>{{ collection.title }}</h4>
+            <p>{{ collection.description }}</p>
+          </div>
+          <div class="medium-up--one-third small--one-half collection-header-image">
+            {%if collection.metafields.IconType.icon == "wash" %}
+              <div class="collection-header-icon xsmall-up-show">
+                {%include 'icon-wash-face', size: '64px'%}
+              </div>
+              <div class="collection-header-icon-small xsmall-down-show">
+                {%include 'icon-wash-face', size: '40px'%}
+              </div>
 
-          {%elsif collection.metafields.IconType.icon == "mask" %}
-            <div class="collection-header-icon xsmall-up-show">
-              {%include 'icon-mask-face', size: '64px'%}
-            </div>
-            <div class="collection-header-icon-small xsmall-down-show">
-              {%include 'icon-mask-face', size: '40px'%}
-            </div>
+            {%elsif collection.metafields.IconType.icon == "mask" %}
+              <div class="collection-header-icon xsmall-up-show">
+                {%include 'icon-mask-face', size: '64px'%}
+              </div>
+              <div class="collection-header-icon-small xsmall-down-show">
+                {%include 'icon-mask-face', size: '40px'%}
+              </div>
 
-          {%elsif collection.metafields.IconType.icon == "star" %}
-            <div class="collection-header-icon xsmall-up-show">
-              {%include 'icon-star-face', size: '64px'%}
-            </div>
-            <div class="collection-header-icon-small xsmall-down-show">
-              {%include 'icon-star-face', size: '40px'%}
-            </div>
-          {%endif%}
-          <img class="image-border-radius" src="{{ collection.image | img_url: '2048x' }}">
+            {%elsif collection.metafields.IconType.icon == "star" %}
+              <div class="collection-header-icon xsmall-up-show">
+                {%include 'icon-star-face', size: '64px'%}
+              </div>
+              <div class="collection-header-icon-small xsmall-down-show">
+                {%include 'icon-star-face', size: '40px'%}
+              </div>
+            {%endif%}
+            <img class="image-border-radius" src="{{ collection.image | img_url: '2048x' }}">
+          </div>
         </div>
       </div>
     </div>

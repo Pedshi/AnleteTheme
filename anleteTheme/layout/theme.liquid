@@ -37,6 +37,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://use.typekit.net/ugj7zln.css">
   {% include 'load-css' %}
+  
 
   <script>
     var theme = {
@@ -100,7 +101,7 @@
       <main class="content-for-layout" id="MainContent" role="main">
         {{ content_for_layout }}
       </main>
-
+      {{ "product-reviews-override.css" | asset_url | stylesheet_tag }}
       {% section 'footer' %}
     </div>
   </div>
