@@ -918,6 +918,40 @@ body:not(.template-index) .main-content {
   }
 }
 
+/*================================ Password-template ================================*/
+.password-header{
+  max-width: 2064px;
+  padding: 88px 24px 0 24px;
+  margin: 0 auto;
+}
+
+.password-modal{
+  margin-top: 32px;
+}
+
+.password-sub-heading{
+  margin-bottom:8px;
+}
+
+.input-password-field{
+  margin-bottom:8px;
+
+  & .password-modal__input{
+    border: 1px solid #121212;
+    border-radius: 10px;
+    padding-left: 8px;
+    height: 24px;
+  }
+}
+
+.storefront-btn{
+  font-family: 'Raleway','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  padding: 4px 24px;
+}
+
+
+/*================================ Index-template ================================*/
 /*================ Header ================*/
 
 .header-ham{
@@ -1059,7 +1093,7 @@ body:not(.template-index) .main-content {
 .dropdown-on-hover:hover .dropdown-categories{
   @include display-flexbox();
   @include flex-direction(column);
-  width: 152px;
+  width: auto;
   background-color: #f1ece5;
   box-shadow: 1px 1px 8px 0px #bfbfbf;
 }
@@ -1072,6 +1106,11 @@ body:not(.template-index) .main-content {
   border-radius: 10px;
   width: 152px;
   z-index: 1;
+
+  & a:hover{
+    text-decoration: underline;
+  }
+
 }
 
 .child-link-wrapper{
@@ -1228,7 +1267,7 @@ body:not(.template-index) .main-content {
 
 .intro-face-icon-wrapper{
   @include align-self(center);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .medium-up-show{
@@ -1280,9 +1319,6 @@ body:not(.template-index) .main-content {
   @include justify-content(space-between);
   @include flex-wrap(wrap);
 
-  & button{
-    width : 136px;
-  }
   @media only screen and (max-width: 599px) {
     @include flex-direction(column);
   }
@@ -1343,6 +1379,11 @@ body:not(.template-index) .main-content {
   @include flex-direction(column);
   @include justify-content(space-between);
   height: 75%;
+}
+
+.three-steps-button{
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 /*================ Product Slider ================*/
@@ -1465,7 +1506,7 @@ body:not(.template-index) .main-content {
 }
 
 .image-and-text-list-container{
-  margin-top: 32px;
+  margin-top: 24px;
 
   & h4{
     margin-bottom: 24px;
@@ -2358,13 +2399,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 
-.re{
-  background-color: red;
-}
-
-.bl{
-  background-color: blue;
-}
 
 .grid__item {
   float: left;
@@ -2378,51 +2412,6 @@ input[type=number]::-webkit-outer-spin-button {
   .grid--gutter-large & {
     padding-left: (3 * $grid-gutter);
   }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-.content-margin {
-  display: flex;
-  flex-wrap: wrap;
-  width: 250px;
-  margin: 36px;
-}
-.prod-card{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  border-radius: 10px;
-  width: 100%;
-}
-
-.card-img-container{
-  display: flex;
-  width: 100%;
-  justify-content: center;
-}
-
-.prod-card-text {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-top: 24px;
-}
-
-.prod-card-text p, h2, ul {
-  padding-top: 0;
-  margin:0;
-  margin-bottom: 8px;
 }
 
 

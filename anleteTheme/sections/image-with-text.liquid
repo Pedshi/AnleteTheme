@@ -8,14 +8,14 @@
       <h1 class="mobile-h1">{{ section.settings.label | escape }}</h1>
       <p class="text-max-width">{{section.settings.text}}</p>
       <div class="image-and-text-list-container">
-        <h4>{{ section.settings.label-2 | escape }}</h4>
+        {%comment%}<h4>{{ section.settings.label-2 | escape }}</h4>{%endcomment%}
         <ul>
           <li>{{ section.settings.list-text-1 | escape }}</li>
           <li>{{ section.settings.list-text-2 | escape }}</li>
           <li>{{ section.settings.list-text-3 | escape }}</li>
           <li>{{ section.settings.list-text-4 | escape }}</li>
         </ul>
-        <a href="/collections">
+        <a href="/">
           <button class="btn-hover-opacity"> Gör testet </button>
         </a>
       </div>
