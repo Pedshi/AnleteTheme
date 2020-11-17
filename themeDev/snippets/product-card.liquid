@@ -1,13 +1,18 @@
 {% assign img_url = product.featured_media.preview_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
 <a href="{{ product.url | within: collection }}">
-  <div>
-    <img class="product-card-image lazyload" src="{{ product.featured_media.preview_image | img_url: '300x'}}"
+  <div class="pos-relative">
+    <img class="product-card-image lazyload {%if product.available == false%} soldout-opacity{%endif%}" src="{{ product.featured_media.preview_image | img_url: '300x'}}"
     alt="{{product.featured_media.preview_image.alt | escape }}"
     data-src="{{ img_url}}"
     data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
     data-aspectratio="{{ product.featured_media.preview_image.aspect_ratio }}"
     data-sizes="auto"
     >
+    {% if product.available == false %}
+      <div class="product-card-soldout">
+      <h4>Slutsåld</h4>
+      </div>
+    {%endif%}
   </div>
 </a>
 <div class="product-card-text-container">
@@ -21,8 +26,16 @@
     </h4>
   </a>
   <h4 class="product-card-info-text">
-    <span class="visually-hidden"> {{ 'products.product.price' | t }} </span>
-    {{ product.price | money_without_trailing_zeros }}
+    {% if product.compare_at_price > product.price %}
+      <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
+      <span class="sale-text-color">{{ product.price | money_without_trailing_zeros }}</span>
+
+      <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+      <span class="compare-at-price"> {{ product.compare_at_price | money_without_trailing_zeros }}</span>
+    {% else %}
+      <span class="visually-hidden"> {{ 'products.product.price' | t }} </span>
+      {{ product.price | money_without_trailing_zeros }}
+    {% endif %}
   </h4>
   <div class="">
     <ul>
@@ -34,6 +47,9 @@
 </div>
 {% form 'product', product, class:'collection-prod-form'%}
   <input type="hidden" name="return_to" value="back" />
-  <button class="prod-collection-button">Lägg till</button>
+  <button class="prod-collection-button {%if product.available == false%} soldout-opacity{%endif%}"
+  {%if product.available == false%} disabled{%endif%}>
+  Lägg till
+  </button>
   <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
 {%endform%}

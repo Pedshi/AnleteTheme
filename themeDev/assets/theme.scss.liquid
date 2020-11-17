@@ -594,6 +594,13 @@ button{
   line-height: 2rem;
 }
 
+.pos-relative{
+  position: relative;
+}
+
+.soldout-opacity{
+  opacity: 0.7 !important;
+}
 /*================ Media Query Mixin ================*/
 @mixin media-query($media-query) {
   $breakpoint-found: false;
@@ -1489,6 +1496,12 @@ body:not(.template-index) .main-content {
   }
 }
 
+.product-card-soldout{
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
 .collection-prod-form{
   margin-top: 8px;
 }
@@ -1502,6 +1515,15 @@ body:not(.template-index) .main-content {
   &:hover{
     text-decoration: underline;
   }
+}
+
+.compare-at-price{
+  margin-left: 8px;
+  text-decoration: line-through;
+}
+
+.sale-text-color{
+  color: #C0363A;
 }
 
 /*================ Image and Text ================*/
