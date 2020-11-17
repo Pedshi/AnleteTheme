@@ -1,0 +1,55 @@
+<div class="page-wrapper" data-section-type="skin-test-section">
+  <div class="about-head-wrapper">
+    <div class="page-width">
+      <div class="sktest-header-text-container">
+        <h1 class="mobile-h1">{{page.title}}</h1>
+        <p> 
+        {{page.content}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="page-width">
+    <div class="small-container res-hide" id="sktest-res">
+      <h1 id="sktest-res-header" class="mobile-h1"> </h1>
+      <p id="sktest-res-text" class="m-top-8"> </p>
+      <p id="sktest-res-sensitive" class="m-top-8"> </p>
+    </div>
+    <div class="sktest-container" id="sktest" display="none">
+      <form class="sktestForm">
+        <p class="sktest-warning-text" id="sktest-not-filled">Välj ett alternativ för varje fråga</p>
+
+        <p>1. Vad beskriver dina porer bäst?</p>
+          <div class="sktest-input">
+            <label><input type="radio" name="pore-size" value="big"> Väldigt synliga</label><br>
+            <label><input type="radio" name="pore-size" value="normal"> Normal stora</label><br>
+            <label><input type="radio" name="pore-size" value="small"> Knappt synliga</label>
+          </div>
+
+        <p>2. På vilka ställen känns ansiktet torr?</p>
+          <div class="sktest-input">            
+            <label><input type="radio" name="dry-spots" value="whole"> Hela ansiktet</label><br>
+            <label><input type="radio" name="dry-spots" value="u-zone"> På kinder, käkben och hakan</label><br>
+            <label><input type="radio" name="dry-spots" value="none"> Inga ställen</label>
+          </div>
+
+        <p>3. På vilka ställen känns ansiktet oljig?</p>
+          <div class="sktest-input">
+            <label><input type="radio" name="oil-spots" value="whole"> Hela ansiktet</label><br>
+            <label><input type="radio" name="oil-spots" value="none"> Inga ställen</label><br>
+            <label><input type="radio" name="oil-spots" value="t-zone"> På pannan och näsan</label>
+          </div>
+
+        <p>4. Kliar ansiktet mycket ?</p>
+          <div class="sktest-input">
+            <label><input type="radio" name="itchy" value="much"> Mycket</label><br>
+            <label><input type="radio" name="itchy" value="small"> Lite</label><br>
+            <label><input type="radio" name="itchy" value="none"> Inget</label>
+          </div>
+
+
+          <button type="submit">Visa Resultat</button>
+      </form>
+    <div>
+  </div>
+</div>

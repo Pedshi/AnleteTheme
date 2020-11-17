@@ -8,9 +8,16 @@
       {% for article in blog.articles %}
         <div class="medium-up--one-third xsmall-small--one-half xsmall--one-whole blog-card"> 
           <div class="article-slider-card">
+            {% assign article_img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
             <a  href="{{ article.url }}" >
-              <img class="image-border-radius" src="{{ article.image.src | img_url: '748x'  }}">
-              <h4 class="medium-header">{{article.title}}</h4>
+              <img class="article-image-radius image-full-width lazyload" src="{{ article.image.src | img_url: '740x'  }}"
+              alt="{{article.image.alt}}"
+              data-src="{{ article_img_url}}"
+              data-widths="[540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+              data-aspectratio="{{ article.image.aspect_ratio }}"
+              data-sizes="auto">
+              <h4 class="medium-header blog-card-title">{{article.title}}</h4>
+              <p class="blog-card-text">{{ article.content | strip_html | truncatewords: 30 }}</p>
             </a>
           </div>
         </div>

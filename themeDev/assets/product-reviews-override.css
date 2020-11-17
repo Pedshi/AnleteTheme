@@ -33,7 +33,11 @@ input, textarea {
   width: 50%;
 }
 
-.spr-form-input, .spr-form-label{
+.spr-form-review textarea{
+  padding-left: 8px;
+}
+
+.spr-form-input-text, .spr-form-label{
   padding-left:8px;
 }
 
@@ -70,35 +74,64 @@ input, textarea {
 }
 
 .spr-review-header{
-  width: 25%;
+  width: 100%;
 }
 
 .spr-review-content{
-  width:100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.spr-review-reply{
+  grid-column-start: 2;
+  grid-column-end: 3;
 }
 
 .spr-review-footer{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  width:25%;
+  grid-row-start: 1;
+  grid-column-start: 3;
 }
 
 .spr-review-reportreview{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  text-align: right;
+  float: unset !important;
+}
+.spr-review-reportreview:hover{
+  text-decoration: underline;
+}
+.spr-review-reply-shop{
+  margin-bottom: 8px;
 }
 
 .spr-review{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 136px auto 104px;
+  grid-template-rows: auto 40%;
 }
+
+@media only screen and (max-width: 699px){
+  .spr-review{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: auto auto auto;
+  }
+
+  .spr-review-content{
+    grid-column-start: 1;
+    grid-row-start: 2;
+  }
+
+  .spr-review-reply{
+    grid-column-start: 1;
+    grid-row-start: 3;
+    margin-left: 0;
+  }
+  
+  .spr-review-footer{
+    grid-column-start: 2;
+    grid-row-start: 1;
+  }
+}
+
 
 @media only screen and (max-width: 999px){
   .spr-header{
@@ -124,10 +157,6 @@ input, textarea {
     width: 100%;
   }
 
-  .spr-review{
-    flex-direction: column;
-  }
-
   .spr-review-header{
     width: 100%;
   }
@@ -136,6 +165,14 @@ input, textarea {
     text-align: left;
     width: 100%;
   }
+
+  .spr-form-contact, .spr-form-review{
+    width: 100%;
+  }
+
+  .spr-form-input-textarea{
+    max-height: 100px;
+  }
 }
 
 
@@ -143,6 +180,7 @@ input, textarea {
   .spr-summary-actions{
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     width: 100%;
   }
 

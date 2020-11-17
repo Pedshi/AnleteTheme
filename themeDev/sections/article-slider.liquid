@@ -10,9 +10,16 @@
       <div class="article-slider-container">
         {% for article in featuredBlogs.articles limit: 3 %} 
         <div class="medium-up--one-third slider-card fade"> 
+          {% assign img_url = article.image.src | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
           <div class="article-slider-card">
             <a  href="{{ article.url }}" >
-              <img class="image-border-radius" src="{{ article.image.src | img_url: '2048x'  }}">
+              <img class="article-image-radius image-full-width lazyload" src="{{ article.image.src | img_url: '500x'  }}"
+              alt="{{article.image.alt}}"
+              data-src="{{ img_url}}"
+              data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+              data-aspectratio="{{ article.image.aspect_ratio }}"
+              data-parent-fit="cover"
+              data-sizes="auto">
               <h4 class="medium-header">{{article.title}}</h4>
             </a>
           </div>
@@ -47,6 +54,7 @@
       if(window.innerWidth < 1000 ){
         showSlides(slideIndex);
       }else{
+        removeBodyClass();
         showCards();
       }
     }

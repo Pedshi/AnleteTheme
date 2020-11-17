@@ -9,7 +9,8 @@ For Getting the image from AWS S3
  </div>
 {%endcomment%}
   <div class="hero lazyload" style="background-image: url('{{ section.settings.hero-image.src | img_url: '2048x'  }}');"
-  data-bgset="{% include 'bgset', image: section.settings.hero-image %}" data-section-type="hero" alt="skincare-for-men"> 
+  data-bgset="{% include 'bgset', image: section.settings.hero-image %}" data-section-type="hero" alt="{{section.settings.hero-image.alt}}"
+  role="region"> 
     <div class="page-width">
       <div class="hero-text-content">
         {% if section.settings.hero-label != blank %}
@@ -24,7 +25,7 @@ For Getting the image from AWS S3
         {% endif %}
         {% if section.settings.hero-button-text != blank %}
           <a href="/blogs/blogg">
-            <button class="image-button">
+            <button class="image-button ">
               {{section.settings.hero-button-text}}
             </button>
           </a>

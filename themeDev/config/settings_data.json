@@ -2,9 +2,9 @@
   "current": {
     "color_primary": "#eb4f47",
     "color_header_text": "#e1c9b4",
-    "color_primary_heading_text": "#121212",
-    "color_primary_body_text": "#121212",
-    "color_footer_text": "#121212",
+    "color_primary_heading_text": "#4a4a4a",
+    "color_primary_body_text": "#4a4a4a",
+    "color_footer_text": "#4a4a4a",
     "color_button_text": "#ffffff",
     "color_header_bg": "#fff",
     "color_footer_bg": "#eae7e0",
@@ -44,19 +44,11 @@
       "header": {
         "type": "header",
         "settings": {
-          "icon": "bag",
-          "logo_max_height": 15,
-          "enable_transparent": true,
-          "transparent_text_color": "#ffffff",
-          "primary_navigation": "main-menu",
-          "secondary_navigation": "footer",
-          "show_social_icons": false,
-          "show_announcement": false,
-          "home_page_only": true,
-          "announcement_text": "Meddela något här",
-          "announcement_icon": "checkmark",
-          "announcement_color_bg": "#eb4f47",
-          "announcement_color_text": "#ffffff"
+          "announcement_bar_enabled": false,
+          "announcement_bar_home_page_only": true,
+          "announcement_bar_text": "Announce something here",
+          "logo_max_width": 250,
+          "menu": "main-menu"
         }
       },
       "footer": {
@@ -73,12 +65,7 @@
           "1486649858082"
         ],
         "settings": {
-          "show_social_icons": true,
-          "show_payment_icons": true,
-          "enable_parallax": true,
-          "show_newsletter": true,
-          "newsletter_heading": "Registrera dig för uppdateringar",
-          "newsletter_subheading": "<p>Kampanjer, nya produkter och försäljning. Direkt till din inkorg.<\/p>"
+          "contact-label": "Har du frågor eller vill ha hjälp?"
         }
       },
       "1476381402840": {
@@ -95,19 +82,7 @@
       },
       "1476381658595": {
         "type": "hero",
-        "settings": {
-          "hero_size": "large",
-          "alignment": "top left",
-          "title": "Prata om ditt varumärke",
-          "text": "<p>Använd den här texten för att dela information om ditt varumärke med dina kunder. Beskriv en produkt, dela meddelanden eller välkomna kunder till din butik.<\/p>",
-          "text_size": "medium",
-          "use_second_button": false,
-          "button_label": "",
-          "show_overlay": false,
-          "overlay_color": "#000000",
-          "overlay_text": "#3a3a3a",
-          "overlay_opacity": "0.5"
-        }
+        "settings": {}
       },
       "collection-template": {
         "type": "collection-template",
@@ -116,8 +91,9 @@
           "rows": "6",
           "product_tags_enable": false,
           "product_sorting_enable": false,
-          "collection_hero_image": false,
+          "collection_hero_image": true,
           "collection_hero_image_parallax": false,
+          "grid_style": "collage",
           "show_spacing": false,
           "show_vendor": true
         }
@@ -172,8 +148,10 @@
         "settings": {
           "show_quantity_selector": false,
           "show_variant_labels": true,
-          "show_vendor": false,
-          "show_share_buttons": true,
+          "show_vendor": true,
+          "enable_payment_button": true,
+          "show_share_buttons": false,
+          "enable_video_looping": false,
           "hide_variant_media": true
         }
       },
@@ -384,7 +362,7 @@
               "heading_color": "#3a3a3a",
               "heading_style": "h4",
               "paragraph_text": "<p>Använd den här texten för att dela information om ditt varumärke med dina kunder. Beskriv en produkt, dela meddelanden eller välkomna kunder till din butik.<\/p>",
-              "paragraph_color": "#121212",
+              "paragraph_color": "#4a4a4a",
               "paragraph_size": "1",
               "width": "100%",
               "alignment": "center",
@@ -401,6 +379,74 @@
           "background_color": "",
           "top_margin": true,
           "bottom_margin": false
+        }
+      },
+      "hero": {
+        "type": "hero",
+        "settings": {
+          "hero-image": "shopify:\/\/shop_images\/Templa-image.jpg",
+          "hero-label": "Hudvård för män först!",
+          "hero-text": "Få en fräschare och lenare hy med en ansiktsrutin som funkar. <br> Läs mer om hur du kan skapa din ansiktsrutin på bloggen.",
+          "hero-button-text": "Till bloggen"
+        }
+      },
+      "three-steps": {
+        "type": "three-steps",
+        "settings": {
+          "image-1": "shopify:\/\/shop_images\/Templa-image.jpg",
+          "image-2": "shopify:\/\/shop_images\/template-2.jpg",
+          "image-3": "shopify:\/\/shop_images\/template-3.jpg",
+          "text-1": "Rengör ansiktet morgon och kväll.",
+          "text-2": "Återfukta ansiktet med en ansiktskräm.",
+          "text-3": "Motverka pormaskar genom att maska 1-2 gånger per vecka.",
+          "header-text": "Kom igång med en 3-stegsrutin"
+        }
+      },
+      "image-with-text": {
+        "type": "image-with-text",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/template-4.jpg",
+          "label": "Hudtyp spelar roll",
+          "text": "Vilken produkt du använder kan ha olika effekt beroende på din hudtyp. För optimalt resultat bör du välja produkter som passar din hudtyp. Gör vår hudtest för att ta reda på vad du har för hudtyp.",
+          "label-2": "",
+          "list-text-1": "Torr - huden känns stram, kan flagna",
+          "list-text-2": "Fet - huden ser oljig ut, stora porer",
+          "list-text-3": "Normal - din hud är varken torr eller oljig",
+          "list-text-4": "Blandhy - din hud är torr på vissa ställen och oljig på andra"
+        }
+      },
+      "product-slider": {
+        "type": "product-slider",
+        "settings": {
+          "collection": "cosrx"
+        }
+      },
+      "article-slider": {
+        "type": "article-slider",
+        "settings": {
+          "blo-slider": "blogg",
+          "label": "Artiklar och Recensioner",
+          "text": "Läs våra vad vi tycker om produkter samt artiklar om hur du tar hand om din hud."
+        }
+      },
+      "list-collections-template": {
+        "type": "list-collections-template",
+        "settings": {
+          "display_type": "all",
+          "grid_style": "collage",
+          "products": "2",
+          "sort": "alphabetical",
+          "show_spacing": false,
+          "show_description": true
+        }
+      },
+      "product-recommendations": {
+        "type": "product-recommendations",
+        "settings": {
+          "show_product_recommendations": false,
+          "heading": "Du kanske också gillar",
+          "show_spacing": false,
+          "show_vendor": true
         }
       }
     },
@@ -541,11 +587,7 @@
         },
         "hero": {
           "type": "hero",
-          "settings": {
-            "text_size": "large",
-            "show_overlay": true,
-            "overlay_opacity": "0.4"
-          }
+          "settings": {}
         },
         "footer": {
           "type": "footer",
@@ -558,11 +600,7 @@
           "block_order": [
             "footer-0"
           ],
-          "settings": {
-            "show_social_icons": true,
-            "show_payment_icons": true,
-            "show_newsletter": true
-          }
+          "settings": {}
         }
       },
       "content_for_index": [
@@ -580,9 +618,9 @@
     "Warm": {
       "color_primary": "#eb4f47",
       "color_header_text": "#e1c9b4",
-      "color_primary_heading_text": "#121212",
-      "color_primary_body_text": "#121212",
-      "color_footer_text": "#121212",
+      "color_primary_heading_text": "#4a4a4a",
+      "color_primary_body_text": "#4a4a4a",
+      "color_footer_text": "#4a4a4a",
       "color_button_text": "#ffffff",
       "color_header_bg": "#fff",
       "color_footer_bg": "#eae7e0",
@@ -621,16 +659,7 @@
       "sections": {
         "header": {
           "type": "header",
-          "settings": {
-            "icon": "bag",
-            "logo_max_height": 15,
-            "enable_transparent": true,
-            "transparent_text_color": "#ffffff",
-            "primary_navigation": "main-menu",
-            "secondary_navigation": "footer",
-            "show_social_icons": false,
-            "announcement_color_bg": "#eb4f47"
-          }
+          "settings": {}
         },
         "footer": {
           "type": "footer",
@@ -645,12 +674,7 @@
           "block_order": [
             "1486649858082"
           ],
-          "settings": {
-            "show_social_icons": true,
-            "show_payment_icons": true,
-            "enable_parallax": true,
-            "show_newsletter": true
-          }
+          "settings": {}
         },
         "1476381402840": {
           "type": "video",
@@ -658,19 +682,7 @@
         },
         "1476381658595": {
           "type": "hero",
-          "settings": {
-            "hero_size": "large",
-            "image": "",
-            "alignment": "top left",
-            "text_size": "medium",
-            "use_second_button": false,
-            "button_label": "",
-            "button_link": "",
-            "show_overlay": false,
-            "overlay_color": "#000000",
-            "overlay_text": "#3a3a3a",
-            "overlay_opacity": "0.5"
-          }
+          "settings": {}
         },
         "collection-template": {
           "type": "collection-template",
@@ -912,7 +924,7 @@
       "color_primary": "#dfa160",
       "color_header_text": "#dfa160",
       "color_primary_heading_text": "#000000",
-      "color_primary_body_text": "#121212",
+      "color_primary_body_text": "#4a4a4a",
       "color_footer_text": "#ffffff",
       "color_button_text": "#ffffff",
       "color_header_bg": "#fff",
@@ -971,16 +983,7 @@
         },
         "header": {
           "type": "header",
-          "settings": {
-            "icon": "bag",
-            "logo_max_height": 15,
-            "enable_transparent": true,
-            "transparent_text_color": "#dfa160",
-            "primary_navigation": "main-menu",
-            "secondary_navigation": "footer",
-            "show_social_icons": true,
-            "announcement_color_bg": "#121212"
-          }
+          "settings": {}
         },
         "footer": {
           "type": "footer",
@@ -995,12 +998,7 @@
           "block_order": [
             "1486586799558"
           ],
-          "settings": {
-            "show_social_icons": true,
-            "show_payment_icons": true,
-            "enable_parallax": true,
-            "show_newsletter": true
-          }
+          "settings": {}
         },
         "feature-row": {
           "type": "feature-row",
@@ -1110,19 +1108,7 @@
         },
         "1486584613697": {
           "type": "hero",
-          "settings": {
-            "hero_size": "large",
-            "alignment": "center center",
-            "text": "",
-            "text_size": "medium",
-            "use_second_button": false,
-            "button_label": "",
-            "button_link": "",
-            "show_overlay": true,
-            "overlay_color": "#ffffff",
-            "overlay_text": "#3a3a3a",
-            "overlay_opacity": "0"
-          }
+          "settings": {}
         },
         "1486584983006": {
           "type": "highlight",
@@ -1175,19 +1161,7 @@
         },
         "1492008725684": {
           "type": "hero",
-          "settings": {
-            "hero_size": "x-large",
-            "alignment": "top center",
-            "title": "",
-            "text": "",
-            "text_size": "medium",
-            "use_second_button": false,
-            "button_label": "Read our blog",
-            "show_overlay": false,
-            "overlay_color": "#000000",
-            "overlay_text": "#3a3a3a",
-            "overlay_opacity": "0.5"
-          }
+          "settings": {}
         },
         "1492807242211": {
           "type": "custom-content",
@@ -1291,16 +1265,7 @@
         },
         "header": {
           "type": "header",
-          "settings": {
-            "icon": "cart",
-            "logo_max_height": 15,
-            "enable_transparent": true,
-            "transparent_text_color": "#00b490",
-            "primary_navigation": "main-menu",
-            "secondary_navigation": "footer",
-            "show_social_icons": true,
-            "announcement_color_bg": "#00b490"
-          }
+          "settings": {}
         },
         "footer": {
           "type": "footer",
@@ -1315,13 +1280,7 @@
           "block_order": [
             "1486664283354"
           ],
-          "settings": {
-            "show_social_icons": true,
-            "show_payment_icons": true,
-            "enable_parallax": true,
-            "show_newsletter": true,
-            "newsletter_heading": "Sign up for updates"
-          }
+          "settings": {}
         },
         "feature-row": {
           "type": "feature-row",
@@ -1412,17 +1371,7 @@
         },
         "1486664864970": {
           "type": "hero",
-          "settings": {
-            "hero_size": "large",
-            "alignment": "top center",
-            "use_second_button": false,
-            "button_label": "",
-            "button_link": "",
-            "show_overlay": true,
-            "overlay_color": "#00b490",
-            "overlay_text": "#ffffff",
-            "overlay_opacity": "0"
-          }
+          "settings": {}
         },
         "1486665151632": {
           "type": "highlight",
@@ -1483,18 +1432,7 @@
         },
         "1486665735205": {
           "type": "hero",
-          "settings": {
-            "hero_size": "medium",
-            "alignment": "center center",
-            "title": "",
-            "text_size": "large",
-            "use_second_button": true,
-            "button_label": "about us",
-            "show_overlay": true,
-            "overlay_color": "#000000",
-            "overlay_text": "#ffffff",
-            "overlay_opacity": "0.5"
-          }
+          "settings": {}
         },
         "product-template": {
           "type": "product-template",

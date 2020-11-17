@@ -1,6 +1,13 @@
+{% assign img_url = product.featured_media.preview_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
 <a href="{{ product.url | within: collection }}">
   <div>
-    <img class="product-card-image" src="{{ product.featured_media.preview_image | img_url: '1000x'}}">
+    <img class="product-card-image lazyload" src="{{ product.featured_media.preview_image | img_url: '300x'}}"
+    alt="{{product.featured_media.preview_image.alt | escape }}"
+    data-src="{{ img_url}}"
+    data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+    data-aspectratio="{{ product.featured_media.preview_image.aspect_ratio }}"
+    data-sizes="auto"
+    >
   </div>
 </a>
 <div class="product-card-text-container">
@@ -13,7 +20,10 @@
     {{product.title}}
     </h4>
   </a>
-  <h4 class="product-card-info-text">{{ product.price | money_without_trailing_zeros }}</h4>
+  <h4 class="product-card-info-text">
+    <span class="visually-hidden"> {{ 'products.product.price' | t }} </span>
+    {{ product.price | money_without_trailing_zeros }}
+  </h4>
   <div class="">
     <ul>
       {%for property in product.metafields.Special%}
@@ -22,7 +32,7 @@
     </ul>
   </div>
 </div>
-{% form 'product', product %}
+{% form 'product', product, class:'collection-prod-form'%}
   <input type="hidden" name="return_to" value="back" />
   <button class="prod-collection-button">Lägg till</button>
   <input type="hidden" name="id" value="{{ product.variants.first.id }}" />

@@ -15,21 +15,29 @@
       <div>
         {% for media in product.media limit: 4 %}
           <div class="detail-image-slider">
-            <img class="image-border-radius" src="{{ media | img_url: '1000x'}}">
+            {% assign prod_img_url = media | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img class="image-border-radius image-full-width lazyload" src="{{ media | img_url: '540x'}}"
+            alt="{{media.alt}}"
+            data-src="{{ prod_img_url}}"
+            data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+            data-aspectratio="{{ media.aspect_ratio }}"
+            data-sizes="auto">
           </div>
         {% endfor %}
       </div>
       <div class="thumbnail-wrapper">
         {% for media in product.media limit: 4 %}
           <div class="thumbnail-img">
-            <img class="thumbnail-border"src="{{ media | img_url: '500x'}}" onclick="currentSlide({{ forloop.index }})">
+            <img class="thumbnail-border"src="{{ media | img_url: '540x'}}" alt="{{media.alt}}"
+            onclick="currentSlide({{ forloop.index }})">
           </div>
         {% endfor %}
       </div>
     </div>
     <div class="detail-desc-container">
-      <h3 class="xsmall-h3 product-vendor-text">{{product.vendor}}</h3>
-      <h4 class="mobile-h4 ">{{product.title}}</h4>
+      <h3 class="xsmall-h3 product-vendor-text" itemprop="brand">{{product.vendor}}</h3>
+      <h4 class="mobile-h4 " itemprop="name">{{product.title}}</h4>
+      <span class="visually-hidden">{{ 'products.product.price' | t }}</span>
       <h4 class="mobile-h4 medium-header">{{product.price | money_without_trailing_zeros }}</h4>
       
       {% form 'product', product %}
@@ -71,7 +79,7 @@
       </div>
       
       
-        <p class="detail-desc-text">{{ product.description }}</p>
+        <p class="detail-desc-text" itemprop="description">{{ product.description }}</p>
         {% for property in product.metafields.DescSlides limit: 4 %}
           <div class="detail-desc-text detail-desc-alt-text">{{ property | last }}</div>
         {%endfor%}

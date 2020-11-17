@@ -25,22 +25,31 @@
     </div>
   {%- endif -%}
 
+  {%- assign icon_color = '#121212' -%}
+  {%- if request.page_type == 'index' -%}
+    <style>
+        .transparent-header-color{
+          color: {{section.settings.color_title}};
+        }
+    </style>
+    {%- assign icon_color = section.settings.color_title -%}
+  {%-endif-%}
   
 
-  <header class="site-header" role="banner">
+  <header class="site-header {%if request.page_type == 'index'%} transparent-header {%else%} regular-header{%endif%}" 
+    role="banner" >
   <div>
     <div class="page-width header-container">
       <div class="header-ham">
-        <a href="javascript:void(0);" class="icon" onclick="toggleFunction()">
+        <button class="mobile-nav-button" onclick="toggleFunction()" data-site-navigation-ham>
           <div id="ham-icon">
-            {% include 'icon-burger' %}
+            {% include 'icon-burger', color: icon_color %}
           </div>
           <div id="close-icon" class="hide-small-nav">
-            {% include 'icon-close' %}
+            {% include 'icon-close', color: icon_color %}
           </div>
-        </a>
+        </button>
       </div>
-
 
       <nav class="header-nav small-hide" role="navigation">
         <ul class="header-ul">
@@ -48,7 +57,7 @@
             {% if link.links != blank %}
               <li class="dropdown-on-hover menu-link">
                 <span class="visually-hidden">{{ 'general.navigation.toggle_sublinks' | t: link_title: link.title }}</span>
-                <span class="cursor-default">{{ link.title }}</span>
+                <span class="cursor-default transparent-header-color">{{ link.title }}</span>
                 <div class="dropdown-container">
                 <ul class="dropdown-categories">
                   <div class="child-link-wrapper">
@@ -66,8 +75,9 @@
               </li>
             {% else %}
               <li class="menu-link">
-                <a href="{{ link.url }}">
-                  {{ link.title }}
+                <a href="{{ link.url }}" class="transparent-header-color">
+                  <span class="visually-hidden">{{ 'general.navigation.toggle_sublinks' | t: link_title: link.title }}</span>
+                  <span class="transparent-header-color">{{ link.title }}</span>
                 </a>
               </li>
             {% endif %}
@@ -75,16 +85,17 @@
         </ul>
       </nav>
 
-      <div class="header-logo-container">
-        <a href="/" class="flex-align-base">
-          <h1 class="logo-header">Anlete</h1>
+      <div class="header-logo-container" itemscope itemtype="http://schema.org/Organization">
+        <a href="/" class="flex-align-base" itemprop="url">
+          <h1 class="logo-header transparent-header-color" itemprop="logo">Anlete</h1>
         </a>
       </div>
 
       <div class="cart-icon-container">
         <a href="/cart" class="header-cart-wrapper">
-          {% include 'icon-bag-cart' %}
-          <p class="header-cart-items" id="header-bag-cart-nbr">{{cart.item_count}}</p>
+          <span class="icon__fallback-text">{{ 'general.header.view_cart' | t }}</span>
+          {% include 'icon-bag-cart', color: icon_color %}
+          <p class="header-cart-items transparent-header-color" id="header-bag-cart-nbr">{{cart.item_count}}</p>
         </a>
       </div>
       {% if shop.customer_accounts_enabled %}
@@ -117,7 +128,9 @@
 
   </div>
 
-
+  {%comment%}
+                                        MOBILE-HEADER
+  {%endcomment%}
   <div id="toggle-header" class="header-ham-navigation small-up-hide" style="display:none;">
       <div class="header-ham-container">
         <nav role="navigation">
@@ -163,18 +176,40 @@
 
   </header>
 <script>
+
+    function removeBodyClass(){
+      if(window.innerWidth > 999 ){
+        hideMobileNav();
+      }
+    }
+
+    function hideMobileNav(){
+      var x = document.getElementById("toggle-header");
+      var ham = document.getElementById("ham-icon");
+      var close = document.getElementById("close-icon");
+      var mainCont = document.querySelector(".main-content");
+      var body = document.body;
+      mainCont.classList.remove('hide-sections');
+      x.style.display = "none";
+      close.style.display = "none";
+      ham.style.display = "block";
+      body.classList.remove("mobile-nav-open");
+    }
+
     function toggleFunction() {
       var x = document.getElementById("toggle-header");
       var ham = document.getElementById("ham-icon");
       var close = document.getElementById("close-icon");
+      var mainCont = document.querySelector(".main-content");
+      var body = document.body;
       if (x.style.display === "block") {
-        x.style.display = "none";
-        close.style.display = "none";
-        ham.style.display = "block";
+        hideMobileNav();
       } else {
+        mainCont.classList.add('hide-sections');
         x.style.display = "block";
         close.style.display = "block";
         ham.style.display = "none";
+        body.classList.add("mobile-nav-open");
       }
     }
 
@@ -186,6 +221,8 @@
         childDiv.style.display = "block";
       }
     }
+
+    window.onresize = removeBodyClass;
   </script>
 </section>
 
@@ -229,6 +266,12 @@
         "type": "image_picker",
         "id": "logo",
         "label": "Logo image"
+      },
+      {
+        "type": "color",
+        "id": "color_title",
+        "label": "Heading color",
+        "default": "#121212"
       },
       {
         "type": "range",

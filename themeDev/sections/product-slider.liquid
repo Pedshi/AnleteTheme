@@ -11,7 +11,7 @@
     {% for product in featuredCollection.products limit: 4 %}
     
       <div class="medium-up--one-quarter xsmall-small--one-half xsmall--one-whole
-        padding-left-d-gutter product-slider-card-wrapper">
+        padding-left-d-gutter product-slider-card-wrapper" id="card-{{ product.id }}">
         {% include 'product-card', product: product %}
       </div>
       

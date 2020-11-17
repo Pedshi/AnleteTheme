@@ -5890,6 +5890,12 @@ sections.register('header-section', {
   /*--------------------------------------------------------------------------*/
   /*                              Navigation                                  */
   /*--------------------------------------------------------------------------*/
+  _showNavigationMobile: function(){
+    console.log('hej');
+    var tmp = $(document.body).hasClass('hide-small-nav');
+    console.log(tmp);
+  },
+
   showNavigation: function() {
     var isOpen = $(document.body).hasClass(classes$17.navigationOpen);
     this.siteNavigation = this.container.querySelector(
@@ -8235,6 +8241,123 @@ sections.register('slideshow-section', {
     this.$slideshow.removeAttr('aria-live');
   }
 });
+
+var selectors$102 = {
+  sktestSubmit: '.sktestForm'
+};
+
+var classes$102 = {
+  poreSize: 'pore-size',
+  drySpots: 'dry-spots',
+  oilSpots: 'oil-spots',
+  acne: 'acne',
+  itchy: 'itchy'
+};
+
+sections.register('skin-test-section', {
+  onLoad: function(){
+    this.on('submit', selectors$102.sktestSubmit, this._calibrateSkinRes.bind(this));
+  },
+  _calibrateSkinRes: function(evt){
+    evt.preventDefault();
+    var poreSize = $("input[name=" + classes$102.poreSize + "]:checked").val();
+    var drySpots = $("input[name=" + classes$102.drySpots + "]:checked").val();
+    var oilSpots = $("input[name=" + classes$102.oilSpots + "]:checked").val();
+    var itchy = $("input[name=" + classes$102.itchy + "]:checked").val();
+    var notFilledText = document.getElementById('sktest-not-filled');
+    var points = [0,0,0,0,0];
+    var res = 0;
+
+    if( !poreSize || !drySpots || !oilSpots || !itchy){
+      notFilledText.style.display = 'block';
+      return;
+    }else{
+      notFilledText.style.display = 'none';
+    }
+
+    switch(poreSize){
+      case 'big':
+        points[1] += 0.2;
+        break;
+      case 'normal':
+        points[2] += 0.2;
+        break;
+      case 'small':
+        points[0] += 0.2;
+        break;
+    }
+
+    switch(drySpots){
+      case 'none':
+        points[1] += 0.3;
+        points[2] += 0.3;
+        break;
+      case 'u-zone':
+        points[3] += 0.6;
+        break;
+      case 'whole':
+        points[0] += 0.3;
+        break;
+    }
+
+    switch(oilSpots){
+      case 'whole':
+        points[1] += 0.3;
+        break;
+      case 't-zone':
+        points[3] += 0.6;
+        break;
+      case 'none':
+        points[0] += 0.3;
+        points[2] += 0.3;
+        break;
+    }
+
+    for(var i=0; i<points.length;i++){
+      if( points[res] < points[i] ) res=i;
+    }
+    this._showTestResult(res);
+    if(itchy == 'much') {
+      var resSens = document.getElementById('sktest-res-sensitive');
+      resSens.textContent = 'Du borde vara extra försiktig med produkter du väljer då du verkar ha en känslig hud. Tita över produter du använder nu och om dessa påverkar din hud negativt, kan t.ex. bero på parfymerade produkter.'
+    }
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  },
+
+  _showTestResult: function(res) {
+    var form = document.getElementById('sktest');
+    var resContainer = document.getElementById('sktest-res');
+    var resHeader = document.getElementById('sktest-res-header');
+    var resText = document.getElementById('sktest-res-text');
+    form.style.display = 'none';
+    resContainer.style.display = 'block';
+
+    switch(res){
+      case 0:
+        resHeader.textContent = 'Torr hy';
+        resText.textContent = 'Tvätt är den viktigaste delen av rutinen. Under dagen sätter sig all sort smuts från föroreningar i luften till den naturliga sebum produktionen av kroppen. Det är viktigt att tvätta bort allt dessa för att låta porerna andas och kunna förse huden med alla nyttigheter som finns i de andra produkterna i rutinen';
+        break;
+      case 1:
+        resHeader.textContent = 'Fet hy';
+        resText.textContent = 'Tvätt är den viktigaste delen av rutinen. Under dagen sätter sig all sort smuts från föroreningar i luften till den naturliga sebum produktionen av kroppen. Det är viktigt att tvätta bort allt dessa för att låta porerna andas och kunna förse huden med alla nyttigheter som finns i de andra produkterna i rutinen';
+        break;
+      case 2:
+        resHeader.textContent = 'Normal hy';
+        resText.textContent = 'Tvätt är den viktigaste delen av rutinen. Under dagen sätter sig all sort smuts från föroreningar i luften till den naturliga sebum produktionen av kroppen. Det är viktigt att tvätta bort allt dessa för att låta porerna andas och kunna förse huden med alla nyttigheter som finns i de andra produkterna i rutinen';
+        break;
+      case 3:
+        resHeader.textContent = 'Bland hy';
+        resText.textContent = 'Tvätt är den viktigaste delen av rutinen. Under dagen sätter sig all sort smuts från föroreningar i luften till den naturliga sebum produktionen av kroppen. Det är viktigt att tvätta bort allt dessa för att låta porerna andas och kunna förse huden med alla nyttigheter som finns i de andra produkterna i rutinen';
+        break;
+    }
+
+  }
+
+
+});
+
+
 
 var selectors$29 = {
   loadPlayerButton: '.video-section__load-player-button',

@@ -3,7 +3,8 @@
 
 <div class="section-wrapper gray-background">
   <div class="image-and-text-container">
-    <img class="image-and-text" src="{{ section.settings.image.src | img_url: '2048x'  }}">
+    <img class="image-and-text lazyload" src="{{ section.settings.image.src | img_url: '2048x'  }}"
+    alt="{{section.settings.image.alt}}">
     <div class="image-and-text-content page-width">
       <h1 class="mobile-h1">{{ section.settings.label | escape }}</h1>
       <p class="text-max-width">{{section.settings.text}}</p>
@@ -15,7 +16,7 @@
           <li>{{ section.settings.list-text-3 | escape }}</li>
           <li>{{ section.settings.list-text-4 | escape }}</li>
         </ul>
-        <a href="/">
+        <a href="/pages/hud-test">
           <button class="btn-hover-opacity"> Gör testet </button>
         </a>
       </div>

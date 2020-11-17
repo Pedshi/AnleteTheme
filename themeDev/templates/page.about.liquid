@@ -1,4 +1,29 @@
-<div class="page-width">
+<div class="page-wrapper">
+  <div class="about-head-wrapper">
+    <div class="page-width about-head-container">
+      <div class="flex-center">
+        <div class="intro-face-icon-wrapper medium-up-show">
+          {% render 'icon-face', size: '134px' %}
+        </div>
+        <div class="intro-face-icon-wrapper small-down-show">
+          {% render 'icon-face', size: '88px' %}
+        </div>
+      </div>
+      <div class="flex-center">
+        <h4 class="medium-header xsmall-h3-regular">
+        Vi vill utöka kunskapen om hudvård och göra det mer lätttillgängligt genom att dela kunskap och ha ett enklare sortiment att välja emellan.. Därför plockar vi de bästa produkterna från hela marknaden..
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="page-width">
+    <div class="about-text-container">
+      <h1> {{ page.title }}</h1>
+      {{ page.content }}
+    </div>
+  </div>
+
+  {%comment%}
   <header class="section-header text-center">
     <h1 class="section-header__title h2">{{ page.title }}</h1>
   </header>
@@ -18,7 +43,7 @@
         {% endif %}
 
         {{ form.errors | default_errors }}
-
+        
         <div class="grid">
           <div class="grid__item medium-up--one-half">
             <label for="ContactFormName" class="label--hidden">{{ 'contact.form.name' | t }}</label>
@@ -40,4 +65,5 @@
       {% endform %}
     </div>
   </div>
+  {%endcomment%}
 </div>

@@ -1,0 +1,400 @@
+{% comment %}
+
+Critical Styles for Super Fast First Render
+--------------------------------------------------------------------------------
+
+First render is an important metric when considering perceived performance. The
+faster the browser can get something on the page, the faster that page feels.
+
+When a browser starts processing a webpage, one thing that prevents it from
+starting to render that page is the external style sheet. Most of the time, not
+all the styles included in the external style sheet are needed for the first
+render of the page. Critical styles are the solution to this problem.
+
+Critical styles are the absolute bare minimum styles needed to get something
+useful on the page. In the case of Narrative, we are including the styles for
+header, background color, and slideshow container.
+
+Currently the process of including these styles is very manual. Hopefully #soon
+we'll be able to generate these critical styles automatically.
+
+{% endcomment %}
+
+{% comment %}
+  Get critical fonts ready
+{% endcomment %}
+
+<style>
+  {%- assign header_font = settings.type_header_font -%}
+  {%- assign base_font = settings.type_base_font -%}
+
+  {{ header_font | font_face }}
+  {{ base_font | font_face }}
+
+  {%- assign base_font_bold = base_font | font_modify: 'weight', 'bolder' -%}
+
+/* ------------------------ Critical Helper Classes ------------------------- */
+.critical-hide {
+  display: none;
+}
+
+.critical-clear {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.drawer-cover {
+  opacity: 0;
+}
+
+.main-content .shopify-section {
+  display: none;
+}
+
+.main-content .shopify-section:first-child {
+  display: inherit;
+}
+
+body:not(.template-index) .main-content {
+  opacity: 0;
+}
+
+
+/* ----------------------------- Global Styles ------------------------------ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+  background-color: #fafafa;
+}
+
+body {
+  margin: 0;
+  font-size: 1rem;
+  font-family: 'Raleway', Helvetica,'Franklin Gothic Medium', Arial, sans-serif;
+  color: #121212;
+  line-height: 1.5rem;
+}
+
+.page-width {
+  max-width: 1176px;
+  padding: 0 24px;
+  margin: 0 auto;
+}
+
+/* ---------------------------- Helper Classes ------------------------------ */
+.visually-hidden,
+.icon__fallback-text {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  border: 0;
+}
+
+/* ----------------------------- Typography --------------------------------- */
+body {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+p{
+  margin:0;
+  padding:0;
+}
+
+h1{
+  line-height: 3.5rem; 
+}
+
+.h4 a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+}
+
+.h4 {
+  font-size: 2.2rem;
+}
+
+ul{
+  padding: 0;
+  margin: 0;
+  list-style-type:none;
+}
+
+a{
+  color: #121212;
+  text-decoration: none;
+}
+
+/* ------------------------------ Buttons ----------------------------------- */
+button{
+  font-family: 'Raleway', Helvetica,'Franklin Gothic Medium', Arial, sans-serif;
+  border: none;
+  padding:0;
+  margin:0;
+}
+
+.image-button {
+  -moz-user-select: "none";
+  -ms-user-select: "none";
+  -webkit-user-select: "none";
+  user-select: "none";
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: 1rem;
+  font-weight: 600;
+  height: 40px;
+  width: 168px;
+  margin-top: 16px;
+  background-color: #11ffee00;
+  border: 1px solid #fafafa;
+  border-radius: 20px;
+  color: #fafafa;
+  cursor: pointer;
+}
+
+
+/* -------------------------------- Icons ----------------------------------- */
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+/* ----------------------------- Site Header -------------------------------- */
+.collection-header-wrapper{
+  max-width: 2064px;
+  margin: 0 auto;
+  width: 100%;
+  background-color: #EEF5F6;
+}
+
+.site-header{
+  max-width: 2064px;
+  margin: 0 auto;
+  width:100%;
+}
+
+.transparent-header{
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  background-color: transparent;
+}
+
+.header-container{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.flex-align-base{
+  align-self: baseline;
+}
+
+.cart-icon-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-self: baseline;
+  min-width: 312px;
+}
+
+.header-logo-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.regular-header{
+  background-color: #f1ece5;
+}
+
+.logo-header{
+  font-family: "Raleway";
+  font-weight: 600;
+  font-size: 32px;
+  letter-spacing: -1.6px;
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav{
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  padding: 0 ;
+  min-width: 360px;
+  margin-top: 4px;
+  margin-left: -48px;
+}
+
+.header-ul{
+  display: flex;
+  height: 100%;
+  margin: 0;
+}
+
+.menu-link{
+  display: inline;
+  margin-left: 48px;
+}
+
+.header-cart-items{
+  position: absolute;
+  font-size: 10px;
+  top: 4px;
+  width: 100%;
+  text-align: center;
+}
+
+.header-cart-wrapper{
+  position: relative;
+}
+
+.cart-bag-icon{
+  margin-bottom: -2px;
+}
+
+.img-text-color{
+  color: #fafafa;
+}
+
+.header-ham{
+  display: none;
+}
+
+.small-hide{
+  display: inherit;
+}
+
+.mobile-nav-button{
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.hide-small-nav{
+  display: none;
+}
+
+.dropdown-categories{
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: #f1ece5;
+  border-radius: 10px;
+  width: 152px;
+  z-index: 1;
+}
+
+/* ----------------------------- Hero --------------------------------- */
+.hero{
+  width: 100%; 
+  height: calc( -64px + 100vh); 
+  max-height: 704px;
+  max-width: 2064px;
+  margin: 0 auto;
+  transform: none;
+  background-color: #bfbfbf;
+  padding-top: 192px;
+  background: {
+    size: cover;
+    repeat: no-repeat;
+    position: 50% 50%;
+  }
+}
+
+.hero-h1{
+  font-family:"adobe-caslon-pro", Georgia, 'Times New Roman', Times, serif !important;
+  font-size: 56px;
+  line-height: 64px;
+  font-weight:400;
+  margin:0;
+  padding:0;
+}
+
+.hero-text-content{
+  width: 528px;
+}
+
+/* ----------------------------- Intro --------------------------------- */
+.flex-center{
+  display: flex;
+  justify-content: center;
+}
+.intro-wrapper{
+  padding: 144px 0;
+}
+.introduction-container{
+  flex-direction: column;
+  width: 760px;
+  text-align: center;
+}
+.intro-face-icon-wrapper{
+  align-self: center;
+  margin-bottom: 16px;
+}
+
+@media only screen and (max-width: 749px){
+  .hero{
+    height: calc( -104px + 100vh); 
+  }
+}
+
+@media only screen and (max-width: 999px) {
+  .header-ham{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    min-width: 24px;
+  }
+  .small-hide{
+    display: none !important;
+  }
+  .cart-icon-container{
+    min-width: 24px;
+  }
+  .hero-h1{
+    font-size: 40px;
+    line-height: 48px;
+  }
+  .hero-text-content{
+    width: 100%;
+    max-width: 528px;
+  }
+  .intro-wrapper{
+    padding: 72px 24px;
+  }
+  .medium-up-show{
+    display: none;
+  }
+  .small-down-show{
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 999px) {
+  .small-up-hide{
+    display: none !important;
+  }
+  .medium-up-show{
+    display: block;
+  }
+  .small-down-show{
+    display: none;
+  }
+}
+
+</style>
