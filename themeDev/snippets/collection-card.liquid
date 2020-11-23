@@ -10,7 +10,7 @@
     {% endif %}
 
     {% unless collection.title == blank %}
-      {% include 'card-image', type: collection_image, grid_style: grid_style %}
+      {% render 'card-image', type: collection_image, grid_style: grid_style %}
     {% else %}
       <div class="card__image-wrapper">
         {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}

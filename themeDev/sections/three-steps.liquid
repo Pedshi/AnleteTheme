@@ -9,7 +9,7 @@
     <div class="three-step-card-container">
       <div class="three-step-card lazyload" style="background-image: url('{{ section.settings.image-1.src | img_url: '2048x'  }}');">
         <div class="three-steps-icon">
-          {%include 'icon-wash-face', size: '64px'%}
+          {%render 'icon-wash-face', size: '64px'%}
         </div>
         <div class="three-steps-content-container">
           <h2 class="img-text-color mobile-h2">{{section.settings.text-1}}</h2>
@@ -25,7 +25,7 @@
     <div class="three-step-card-container">
       <div class="three-step-card lazyload" style="background-image: url('{{ section.settings.image-2.src | img_url: '2048x'  }}');">
         <div class="three-steps-icon">
-          {%include 'icon-star-face', size: '64px'%}
+          {%render 'icon-star-face', size: '64px'%}
         </div>
         <div class="three-steps-content-container">
           <h2 class="img-text-color mobile-h2">{{section.settings.text-2}}</h2>
@@ -41,7 +41,7 @@
     <div class="three-step-card-container">
       <div class="three-step-card lazyload" style="background-image: url('{{ section.settings.image-3.src | img_url: '2048x'  }}');">
         <div class="three-steps-icon">
-          {%include 'icon-mask-face', size: '64px'%}
+          {%render 'icon-mask-face', size: '64px'%}
         </div>
         <div class="three-steps-content-container">
           <h2 class="img-text-color mobile-h2">{{section.settings.text-3}}</h2>

@@ -2137,6 +2137,46 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
+.detail-list-wrapper{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  @include flex-direction(column);
+}
+
+.flex-between{
+  @include justify-content(space-between);
+}
+
+.header-underline{
+  width: 100%;
+  border-bottom: 1px solid #ececec;
+}
+
+.detail-list{
+  font-size: 1rem;
+}
+
+.not-inc-items{
+  margin-top: 16px;
+  &::before{
+    content: "-";
+    margin-right: 8px;
+  }
+}
+
+.key-ingredients-item{
+  margin-top: 16px;
+}
+
+.our-review-container{
+  margin-left: 8px;
+  margin-top: 64px;
+  text-decoration: underline;
+  @include media-query($small){
+    margin-left: 0;
+  }
+}
 
 /*================================ Blog-template ================================*/
 
@@ -2187,16 +2227,17 @@ input[type=number]::-webkit-outer-spin-button {
 
 .article-template{
   width: 100%;
-  padding: 56px 140px 312px 140px;
+  padding: 56px 140px 64px 140px;
   max-width: 1176px;
   margin: 0 auto;
 
   @include media-query($xsmall){
-    padding: 32px 24px 416px 24px;
+    padding: 32px 24px 48px 24px;
   }
 }
 
 .article-title{
+  color: #292929;
   @include media-query($small){
     font-size: 32px;
     line-height: 40px;
@@ -2223,7 +2264,6 @@ input[type=number]::-webkit-outer-spin-button {
 .article-header-image{
   margin: 0 auto;
   max-width: 680px;
-  max-height: 352px;
   width:100%;
   object-fit: cover;
 }
@@ -2232,10 +2272,17 @@ input[type=number]::-webkit-outer-spin-button {
   padding-top: 16px;
   margin: 0 auto;
   max-width: 680px;
-  & p{
+  & p, li{
     font-size: 20px !important;
     font-family: "adobe-caslon-pro", Georgia, 'Times New Roman', Times, serif !important;
     line-height: 32px !important;
+    color: #292929;
+  }
+  & ul {
+    list-style-type: disc;
+    margin-left: 32px;
+    margin-top: 0;
+    padding-top: 0;
   }
 
   @include media-query($small){
@@ -2247,8 +2294,13 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .article-content-header{
-  margin-bottom: 8px;
+  font-family: "Raleway";
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: rem(32);
+  line-height: rem(40);
   font-weight: 600;
+  color: #292929;
   @include media-query($xsmall) {
     font-size: rem(24);
     line-height: rem(32);
@@ -2275,6 +2327,48 @@ input[type=number]::-webkit-outer-spin-button {
   object-fit: cover;
 }
 
+.article-rec-wrapper{
+  @include display-flexbox();
+  @include flex-direction(column);
+  width: 100%;
+  padding: 56px 140px 344px 140px;
+  max-width: 1176px;
+  margin: 0 auto;
+
+  @include media-query($small){
+    padding: 56px 24px 448px 24px;
+  }
+}
+
+.article-rec-container{
+  width: 100%;
+  padding: 24px;
+  margin: -24px;
+  @include display-flexbox();
+  @include flex-direction(row);
+
+  @include media-query($small){
+    padding: 0 16px;
+    margin: 0;
+    justify-content: center;
+  }
+
+}
+
+.rec-card-wrapper{
+  margin-left: 24px;
+
+  @include media-query($small){
+    margin:0;
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
+.line-separator{
+  border-top: 1px solid #bfbfbf;
+  padding: 24px;
+}
 
 /*================================ Cart-template ================================*/
 
@@ -2557,6 +2651,22 @@ input[type=number]::-webkit-outer-spin-button {
 
 .m-top-8{
   margin-top: 8px;
+}
+
+.m-top-16{
+  margin-top: 16px;
+}
+
+.m-top-104{
+  margin-top: 104px;
+}
+
+.m-bottom-104{
+  margin-bottom: 104px;
+}
+
+.m-bottom-64{
+  margin-bottom: 64px;
 }
 
 .res-hide{

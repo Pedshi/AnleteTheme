@@ -19,6 +19,116 @@
 
   {% section 'article-template' %}
 
+
+{% assign current_tags = article.tags %}
+{% assign count = 3 %}
+{% assign dot_count = 0%}
+  <div class="article-rec-wrapper">
+    <div class="line-separator">
+      <h3> Relaterade artiklar</h3>
+    </div>
+    <div class="article-rec-container">
+    {% for rec_articles in blog.articles%}
+
+      {% if count == 0 %}
+        {% break %}
+      {% endif%}
+
+      {%if rec_articles.title == article.title%}
+        {% continue %}
+      {%endif%}
+
+      {% for tag in current_tags%}
+
+        {% if rec_articles.tags contains tag %}
+
+
+          <div class="medium-up--one-third rec-card-wrapper fade"> 
+            <div class="article-slider-card">
+              {% assign rec_articles_img_url = rec_articles.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <a  href="{{ rec_articles.url }}" >
+                <img class="article-image-radius image-full-width lazyload" src="{{ rec_articles.image.src | img_url: '740x'}}"
+                alt="{{rec_articles.image.alt}}"
+                data-src="{{ rec_articles_img_url}}"
+                data-widths="[540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+                data-aspectratio="{{ rec_articles.image.aspect_ratio }}"
+                data-sizes="auto">
+                <h4 class="medium-header">{{article.title}}</h4>
+              </a>
+            </div>
+          </div>
+
+          {% assign count = count | minus: 1 %}
+          {% assign dot_count = dot_count | plus: 1%}
+          {%break%}
+        {%endif%}
+
+      {%endfor%}
+
+    {%endfor%}
+    </div>
+    <div class="small-down-show slider-dots-container">
+      {% for i in (1..dot_count) %}
+        <span class="dot" onclick="currentSlide({{ forloop.index }})"></span> 
+      {% endfor %}
+    </div>
+</div>
+
+
+<script>
+    var slideIndex = 1;
+
+    if(window.innerWidth < 1000 ){
+      showSlides(slideIndex);
+    }
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function setupSlider(){
+      if(window.innerWidth < 1000 ){
+        showSlides(slideIndex);
+      }else{
+        showCards();
+      }
+    }
+
+    function showCards(){
+      var slides = document.getElementsByClassName("rec-card-wrapper");
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "block";  
+      }
+    }
+
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("rec-card-wrapper");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" dot-active", "");
+      }
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " dot-active";
+    }
+
+    window.onresize = setupSlider;
+  </script>
+
+
+
+
+
+
   {% if blog.comments_enabled? and number_of_comments > 0 %}
     <div class="comments-wrapper">
       <div class="page-width">

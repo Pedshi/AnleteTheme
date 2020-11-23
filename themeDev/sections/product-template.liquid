@@ -98,10 +98,41 @@
         {% for property in product.metafields.DescSlides limit: 4 %}
           <div class="detail-desc-text detail-desc-alt-text">{{ property | last }}</div>
         {%endfor%}
-      
+
+        {% if product.metafields.ourReview.link %}
+          <div class="our-review-container">
+            <a class="link-hover-opacity-text" href="{{product.metafields.ourReview.link}}"> Vår recension av produkten </a>
+          </div>
+        {%endif%}
     </div>
   </div>
-  
+
+
+  {% assign notIncludedList =  product.metafields.detailList.doesNotInc | split: ',' %}
+  {% assign includedList =  product.metafields.detailList.keyIngredients | split: ';' %}
+  <div class="product-detail-container m-top-104 m-bottom-104 flex-between">
+    <div class="detail-list-wrapper medium-up--two-fifths small--one-whole m-bottom-64">
+      <h4 class="header-underline">Innehåller inte listan<h4>
+      <ul class="detail-list">
+        {% for item in notIncludedList %}
+          <li class="not-inc-items">{{item}}</li>
+        {%endfor%}
+      </ul>
+    </div>
+    
+    <div class="detail-list-wrapper medium-up--two-fifths small--one-whole">
+      <h4 class="header-underline">Nyckelingredienser</h4>
+      <ul class="detail-list">
+        {% for item in includedList%}
+          {% assign ingredient = item | split: '#'%}
+          <li class="key-ingredients-item">
+           <strong>{{ingredient | first }} </strong> {{ ingredient | last }}
+           </li>
+        {%endfor%}
+      </ul>
+    </div>
+  </div>
+
 <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
   
   <script>

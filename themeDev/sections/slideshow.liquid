@@ -146,12 +146,12 @@
               {%- if block.settings.cta_link != blank -%}
                 <a href="{{ block.settings.cta_link }}" class="slideshow__button-cta slideshow__button-cta--multiple medium-up--hide btn" tabindex="-1">
                   <span class="visually-hidden">{{ block.settings.cta | escape }}</span>
-                  {% include 'icon-plus' %}
+                  {% render 'icon-plus' %}
                 </a>
               {%- else -%}
                 <div class="slideshow__button-cta slideshow__button-cta--multiple medium-up--hide btn" tabindex="-1">
                   <span class="visually-hidden">{{ block.settings.cta | escape }}</span>
-                  {% include 'icon-plus' %}
+                  {% render 'icon-plus' %}
                 </div>
               {%- endif -%}
 
