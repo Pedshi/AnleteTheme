@@ -11,19 +11,7 @@
   - Home page only: only shows on the home page
 {%- endcomment -%}
 <section data-section-id="{{ section.id }}" data-section-type="header">
-  {%- if section.settings.announcement_bar_enabled -%}
-    <div>
-      {%- if section.settings.announcement_bar_home_page_only == false or template.name == 'index' -%}
-        {%- if section.settings.announcement_bar_link != blank -%}
-          <a href="{{ section.settings.announcement_bar_link }}">
-            {{ section.settings.announcement_bar_text | escape }}
-          </a>
-        {%- else -%}
-          <p>{{ section.settings.announcement_bar_text | escape }}</p>
-        {%- endif -%}
-      {%- endif -%}
-    </div>
-  {%- endif -%}
+  
 
   {%- assign icon_color = '#121212' -%}
   {%- if request.page_type == 'index' -%}
@@ -38,6 +26,51 @@
 
   <header class="site-header {%if request.page_type == 'index'%} transparent-header {%else%} regular-header{%endif%}" 
     role="banner" >
+
+    {%- if section.settings.announcement_bar_enabled -%}
+    <div>
+      {%- if section.settings.announcement_bar_home_page_only == false or template.name == 'index' -%}
+        <style>
+          .announcement-bar {
+            background-color: {{ section.settings.announcement_color_bg }};
+          }
+
+          .announcement-bar--link:hover {
+            {% assign brightness = section.settings.announcement_color_bg | color_brightness %}
+
+            {% if brightness <= 192 %}
+              {% assign lightenAmount = 255 | minus: brightness | divided_by: 255 | times: 16 %}
+              background-color: {{ section.settings.announcement_color_bg | color_lighten: lightenAmount }};
+            {% else %}
+              {% assign darkenAmount = 255 | divided_by: brightness | times: 8 %}
+              background-color: {{ section.settings.announcement_color_bg | color_darken: darkenAmount }};
+            {% endif %}
+          }
+
+          .announcement-bar__message,
+          .announcement-bar__close {
+            color: {{ section.settings.announcement_color_text }};
+          }
+        </style>
+        {%- if section.settings.announcement_bar_link != blank -%}
+          <a href="{{ section.settings.announcement_bar_link }}">
+            {{ section.settings.announcement_bar_text | escape }}
+          </a>
+        {%- else -%}
+          <div class="announcement-bar announcement-bar--visible">
+            <p class="announcement-bar__message page-width">
+              {{ section.settings.announcement_bar_text | escape }}
+            </p>
+            <button class="announcement-bar__close btn btn--clear" onclick="closeBanner()" aria-expanded="true">
+              {% include 'icon-close', color: section.settings.announcement_color_text %}
+            </button>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+
   <div>
     <div class="page-width header-container">
       <div class="header-ham">
@@ -222,6 +255,11 @@
       }
     }
 
+    function closeBanner(){
+      var banner = document.querySelector(".announcement-bar");
+      banner.classList.remove("announcement-bar--visible");
+    }
+
     window.onresize = removeBodyClass;
   </script>
 </section>
@@ -272,6 +310,18 @@
         "id": "color_title",
         "label": "Heading color",
         "default": "#121212"
+      },
+      {
+        "type": "color",
+        "id": "announcement_color_bg",
+        "label": "Announcement background color",
+        "default": "#0f4c81"
+      },
+      {
+        "type": "color",
+        "id": "announcement_color_text",
+        "label": "Announcement text color",
+        "default": "#fafafa"
       },
       {
         "type": "range",
