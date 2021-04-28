@@ -25,7 +25,7 @@
 {% assign dot_count = 0%}
   <div class="article-rec-wrapper">
     <div class="line-separator">
-      <h3> Relaterade artiklar</h3>
+      <h3>Related articles</h3>
     </div>
     <div class="article-rec-container">
     {% for rec_articles in blog.articles%}
@@ -53,7 +53,7 @@
                 data-widths="[540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
                 data-aspectratio="{{ rec_articles.image.aspect_ratio }}"
                 data-sizes="auto">
-                <h4 class="medium-header">{{article.title}}</h4>
+                <h4 class="medium-header">{{rec_articles.title}}</h4>
               </a>
             </div>
           </div>

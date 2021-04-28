@@ -112,7 +112,7 @@
   {% assign includedList =  product.metafields.detailList.keyIngredients | split: ';' %}
   <div class="product-detail-container m-top-104 m-bottom-104 flex-between">
     <div class="detail-list-wrapper medium-up--two-fifths small--one-whole m-bottom-64">
-      <h4 class="header-underline">Innehåller inte listan<h4>
+      <h4 class="header-underline">Does not include<h4>
       <ul class="detail-list">
         {% for item in notIncludedList %}
           <li class="not-inc-items">{{item}}</li>
@@ -121,7 +121,7 @@
     </div>
     
     <div class="detail-list-wrapper medium-up--two-fifths small--one-whole">
-      <h4 class="header-underline">Nyckelingredienser</h4>
+      <h4 class="header-underline">Key ingredients</h4>
       <ul class="detail-list">
         {% for item in includedList%}
           {% assign ingredient = item | split: '#'%}
