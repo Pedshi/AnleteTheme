@@ -71,24 +71,24 @@
           </select>
           <button type="submit" name="add" data-cart-submit class="btn-hover-opacity detail-add-button {%if product.available == false%} soldout-opacity{%endif%}"
           {%if product.available == false%} disabled{%endif%}>
-            Lägg Till
+            Add to cart
           </button>
         </div>
       {% endform %}
       {% if product.available == false %}
-        <h4 class="medium-header">Slutsåld</h4>
+        <h4 class="medium-header">Sold out</h4>
       {%endif%}
       <div class="detail-text-slider">
-        <span class="small-slider-text detail-slider h5" onclick="currentDetailDesc(0)">Detaljer</span>
+        <span class="small-slider-text detail-slider h5" onclick="currentDetailDesc(0)">Details</span>
         {%for property in product.metafields.DescSlides limit: 4 %}
           {% assign propType = property.first %}
           {% case propType %}
             {% when "Skintypes" %}
-              <span class="small-slider-text detail-slider h5" onclick="currentDetailDesc({{ forloop.index }})">Hudtyp</span>
+              <span class="small-slider-text detail-slider h5" onclick="currentDetailDesc({{ forloop.index }})">Skin type</span>
             {% when "Instructions" %}
-              <span class="large-slider-text detail-slider h5" onclick="currentDetailDesc({{ forloop.index }})">Instruktioner</span>
+              <span class="large-slider-text detail-slider h5" onclick="currentDetailDesc({{ forloop.index }})">Instructions</span>
             {% else %}
-              <span class="large-slider-text detail-slider h5" onclick="currentDetailDesc({{ forloop.index }})">Ingredienser</span>
+              <span class="large-slider-text detail-slider h5" onclick="currentDetailDesc({{ forloop.index }})">Ingredients</span>
           {% endcase %}
         {%endfor%}
       </div>

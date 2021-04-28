@@ -8319,7 +8319,7 @@ sections.register('skin-test-section', {
     this._showTestResult(res);
     if(itchy == 'much') {
       var resSens = document.getElementById('sktest-res-sensitive');
-      resSens.textContent = 'Du borde vara extra försiktig med produkter du väljer då du verkar ha en känslig hud. Titta över produter du använder nu och om det möjligtvis är de som orsakar att det kliar, det kan t.ex.  orsakas av produkter som innehåller mycket parfym.'
+      resSens.textContent = 'Vestibulum et pretium leo, sit amet dictum elit. Sed vulputate tortor quis nunc consequat luctus. Pellentesque tristique, massa condimentum auctor luctus, elit felis sodales nibh, at dictum tellus velit consequat sapien. '
     }
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
@@ -8336,24 +8336,24 @@ sections.register('skin-test-section', {
 
     switch(res){
       case 0:
-        resHeader.textContent = 'Du har torr hud';
-        resText.textContent = 'En torr hud känns stram och kan även se grå och tråkig ut. Den är också mer benägen till att flagna och få huden att se "dammig" ut. Torr hud uppstår oftast p.g.a. att huden producerar mindre fett än vad som behövs och det är detta underskottet av fett som leder till att huden har svårare för att hålla in vatten och därav blir uttorkad.';
-        resTextSol.textContent = 'Använd en ansiktskräm, helst en kräm som är lite tjockare, det hjälper till att hålla kvar vatten i huden. Vill du ge huden ordentligt med fukt och snabbare resultat så kan du använda en återfuktande ansiktsmask. För bra effekt är det viktigt att rengöra ansiktet innan.';
+        resHeader.textContent = 'Lorem ipsum dolor sit amet';
+        resText.textContent = 'Fusce vitae libero sed justo tincidunt tincidunt ac vel velit. Curabitur in quam id nibh tempus imperdiet. Vivamus vestibulum nisi eget lorem venenatis fringilla. Duis tincidunt pharetra sagittis.';
+        resTextSol.textContent = 'Vestibulum et pretium leo, sit amet dictum elit. Sed vulputate tortor quis nunc consequat luctus. Pellentesque tristique, massa condimentum auctor luctus, elit felis sodales nibh, at dictum tellus velit consequat sapien. ';
         break;
       case 1:
-        resHeader.textContent = 'Du har fet hud';
-        resText.textContent = 'En fet hud ser oftast blank och oljig ut, den är också mer benägen till att få finnar och pormaskar. Anledningen till att huden ser blank och oljig ut är på grund av hudens överproduktion av fett. Det är även denna överskott som kan täppa igen porer som sedan blir till pormaskar och finnar.';
-        resTextSol.textContent = 'Använd rengöringsprodukter som är exfolierande och skonsamma för att få bort extra fett och smuts. Efter att du rengjort ansiktet är det viktigt att följa upp med en lättare ansiktskräm, annars kan huden producera mer fett än tidigare för att kompensera det som precis tvättats bort!';
+        resHeader.textContent = 'Lorem ipsum dolor sit amet';
+        resText.textContent = 'Fusce vitae libero sed justo tincidunt tincidunt ac vel velit. Curabitur in quam id nibh tempus imperdiet. Vivamus vestibulum nisi eget lorem venenatis fringilla. Duis tincidunt pharetra sagittis.';
+        resTextSol.textContent = 'Vestibulum et pretium leo, sit amet dictum elit. Sed vulputate tortor quis nunc consequat luctus. Pellentesque tristique, massa condimentum auctor luctus, elit felis sodales nibh, at dictum tellus velit consequat sapien. ';
         break;
       case 2:
-        resHeader.textContent = 'Du har normal hud';
-        resText.textContent = 'En normal hud ser varken fet eller torr ut, har normal stora porer och känns len.';
-        resTextSol.textContent = 'Tänk på att hudens förmåga att producera fett avtar med åren så försök att att använda en skonsamm tvätt och en lättare ansiktskräm för att behålla huden len.';
+        resHeader.textContent = 'Lorem ipsum dolor sit amet';
+        resText.textContent = 'Fusce vitae libero sed justo tincidunt tincidunt ac vel velit. Curabitur in quam id nibh tempus imperdiet. Vivamus vestibulum nisi eget lorem venenatis fringilla. Duis tincidunt pharetra sagittis.';
+        resTextSol.textContent = 'Vestibulum et pretium leo, sit amet dictum elit. Sed vulputate tortor quis nunc consequat luctus. Pellentesque tristique, massa condimentum auctor luctus, elit felis sodales nibh, at dictum tellus velit consequat sapien. ';
         break;
       case 3:
-        resHeader.textContent = 'Du har blandad hud';
-        resText.textContent = 'En blandad hud eller kombinations hud är den vanligaste hudtypen, den är fet på T-zonen (pannan, näsan och hakan) men torr på kinderna och käkbenen.';
-        resTextSol.textContent = 'Använd milda och skonsamma produkter och tänk på att inte använda för starka produkter på ställen du är torr. Punktbehandla olika delar av ansiktet genom att använda en djuprengörande ansiktsmask på de fetare platserna och en återfuktande ansiktsmask på de torra platserna.';
+        resHeader.textContent = 'Lorem ipsum dolor sit amet';
+        resText.textContent = 'Fusce vitae libero sed justo tincidunt tincidunt ac vel velit. Curabitur in quam id nibh tempus imperdiet. Vivamus vestibulum nisi eget lorem venenatis fringilla. Duis tincidunt pharetra sagittis.';
+        resTextSol.textContent = 'Vestibulum et pretium leo, sit amet dictum elit. Sed vulputate tortor quis nunc consequat luctus. Pellentesque tristique, massa condimentum auctor luctus, elit felis sodales nibh, at dictum tellus velit consequat sapien. ';
         break;
     }
 
